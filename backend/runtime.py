@@ -6,6 +6,7 @@ from models import TransactionResult
 from settings import settings
 
 _results: list[TransactionResult] = []
+_agent_reviews: dict[str, object] = {}
 
 
 def process_all(
@@ -18,9 +19,20 @@ def process_all(
     if root.is_dir():
         for pdf in sorted(root.glob("*.pdf")):
             results.extend(process_statement(pdf, refs))
-    global _results
+    global _results, _agent_reviews
     _results = results
+    _agent_reviews = {}
     return results
+
+
+def store_agent_review(review: object) -> None:
+    transaction_id = getattr(review, "transaction_id", None)
+    if transaction_id:
+        _agent_reviews[transaction_id] = review
+
+
+def get_agent_review(transaction_id: str) -> object | None:
+    return _agent_reviews.get(transaction_id)
 
 
 def current_results() -> list[TransactionResult]:

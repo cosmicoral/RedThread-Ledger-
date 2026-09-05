@@ -30,6 +30,7 @@ ENV HACKATHON_STATEMENTS_DIR=/data/hackathon/bank-statements
 ENV HACKATHON_REFERENCE_DIR=/data/hackathon/reference-data
 ENV STATIC_DIR=/app/frontend/dist
 ENV CORS_ORIGINS=*
+ENV AGENT_ENABLED=false
 ENV PORT=8080
 
 EXPOSE 8080

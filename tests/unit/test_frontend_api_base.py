@@ -18,3 +18,14 @@ def test_frontend_src_does_not_embed_localhost_hosts() -> None:
         if "localhost:8000" in text or "http://localhost" in text or "https://localhost" in text:
             offenders.append(str(path.relative_to(FRONTEND_SRC)))
     assert offenders == []
+
+
+def test_frontend_does_not_embed_model_secrets() -> None:
+    offenders: list[str] = []
+    for path in FRONTEND_SRC.rglob("*"):
+        if path.suffix not in {".ts", ".tsx"}:
+            continue
+        text = path.read_text()
+        if "GEMINI_API_KEY" in text or "AIza" in text:
+            offenders.append(str(path.relative_to(FRONTEND_SRC)))
+    assert offenders == []

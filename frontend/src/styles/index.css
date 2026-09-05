@@ -213,3 +213,28 @@ td {
 .empty code {
   font-size: 0.9em;
 }
+
+.agent-panel {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.agent-trace {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+
+.agent-trace li {
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+}
+
+.agent-trace li.done {
+  border-color: var(--accent);
+  color: var(--accent);
+}

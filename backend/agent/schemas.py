@@ -54,18 +54,31 @@ FUNCTION_DECLARATIONS = [
     {
         "name": "search_external_sources",
         "description": (
-            "Corroborate an entity or background term via grounded web search. "
-            "Never pass bank account numbers or a complete transaction narrative."
+            "Corroborate a named entity via grounded web search. Pass structured "
+            "fields only. Do not pass a query string, narrative, account number, "
+            "amount, date, or transaction reference. The server builds the search."
         ),
         "parameters": {
             "type": "OBJECT",
             "properties": {
-                "query": {
+                "entity_name": {
                     "type": "STRING",
-                    "description": "Short entity or background term only",
-                }
+                    "description": "Short organisation or person name, letters first",
+                },
+                "entity_type": {
+                    "type": "STRING",
+                    "description": "vendor, legal_entity, investor, related_party, project, or counterparty",
+                },
+                "jurisdiction": {
+                    "type": "STRING",
+                    "description": "Optional country or region name, letters only",
+                },
+                "project_name": {
+                    "type": "STRING",
+                    "description": "Optional project or deal name",
+                },
             },
-            "required": ["query"],
+            "required": ["entity_name", "entity_type"],
         },
     },
     {
@@ -89,7 +102,9 @@ Human approval is always required.
 
 Use only these tools. Prefer internal master data over the web.
 search_external_sources is for entity/background corroboration only.
-Never include account numbers or the complete narrative in a search query.
+Call it with entity_name and entity_type only. Never pass query, account numbers,
+amounts, dates, transaction references, or the complete narrative.
+Do not author citation URLs. Citations come from grounding metadata.
 
 After the tools, return JSON only with this shape:
 {

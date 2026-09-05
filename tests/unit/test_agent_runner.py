@@ -44,7 +44,10 @@ def test_mocked_agent_suggests_without_changing_original(monkeypatch) -> None:
             ),
             ModelTurn(
                 function_calls=[
-                    FunctionCall("search_external_sources", {"query": "Trentbeck Audit Luxembourg"})
+                    FunctionCall(
+                        "search_external_sources",
+                        {"entity_name": "Trentbeck Audit", "entity_type": "vendor"},
+                    )
                 ]
             ),
             ModelTurn(
@@ -65,7 +68,8 @@ def test_mocked_agent_suggests_without_changing_original(monkeypatch) -> None:
         model=model,
         search_fn=lambda query: {
             "results": [{"text": "Audit firm"}],
-            "citations": [{"title": "Example", "uri": "https://example.com", "snippet": query}],
+            "citations": [{"title": "ignored", "uri": "https://not-grounded.example"}],
+            "grounding_citations": [{"title": "Example", "uri": "https://example.com", "snippet": query}],
         },
     )
     assert review.status.value == "agent_suggested"
@@ -146,6 +150,26 @@ def test_tool_rounds_are_capped_at_four(monkeypatch) -> None:
     assert len(review.tool_trace) == 4
     assert review.status.value == "needs_human_review"
     assert review.status.value != "ready_to_post"
+
+
+def test_model_authored_citation_urls_are_ignored(monkeypatch) -> None:
+    transaction_id = _needs_review_id()
+    monkeypatch.setattr("agent.runner.settings.agent_enabled", True)
+    model = SequenceModel(
+        [
+            ModelTurn(
+                text=(
+                    '{"status":"needs_human_review","summary":"No grounded sources.",'
+                    '"proposed_fields":{},"proposed_journal_lines":[],"confidence":0.1,'
+                    '"external_citations":[{"title":"evil","uri":"https://evil.example","snippet":"no"}]}'
+                )
+            )
+        ]
+    )
+    review = run_agent_review(transaction_id, model=model)
+    assert review.external_citations == []
+    assert review.status.value == "needs_human_review"
+    assert review.human_approval_required is True
 
 
 def test_gemini_error_falls_back(monkeypatch) -> None:

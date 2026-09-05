@@ -74,7 +74,7 @@ def grounded_search(query: str) -> dict[str, Any]:
             )
     return {
         "results": [{"text": getattr(response, "text", "") or ""}],
-        "citations": citations,
+        "grounding_citations": citations,
     }
 
 

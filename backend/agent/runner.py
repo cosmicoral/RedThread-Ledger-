@@ -16,6 +16,7 @@ from agent.models import (
     ToolTraceItem,
     ValidationResult,
 )
+from agent.sanitize import redact_for_log
 from agent.tools import dispatch_tool, require_needs_review, validate_proposed_journal
 from models import TransactionResult
 from runtime import get_transaction
@@ -112,6 +113,7 @@ def _build_result(
             transaction,
         )
     )
+    parsed.pop("external_citations", None)
     fields = parsed.get("proposed_fields") if isinstance(parsed.get("proposed_fields"), dict) else {}
     status = _coerce_status(str(parsed.get("status") or ""), validation, escalated)
     questions = [str(item) for item in parsed.get("unresolved_questions") or []]
@@ -194,7 +196,8 @@ def _loop(
                 internal.extend(payload.get("candidates") or [])
             if call.name == "search_external_sources":
                 for row in payload.get("citations") or []:
-                    citations.append(Citation.model_validate(row))
+                    if str(row.get("uri") or "").startswith("https://"):
+                        citations.append(Citation.model_validate({**row, "snippet": ""}))
             if call.name == "escalate_to_human" or payload.get("escalated"):
                 escalated = True
                 escalate_reason = str(payload.get("reason") or "Escalated to a human reviewer")
@@ -249,10 +252,17 @@ def TOOL_STEP_SAFE(name: str) -> str:
 
 
 def _safe_args(arguments: dict[str, Any]) -> dict[str, Any]:
+    if "entity_name" in arguments or "query" in arguments:
+        return {
+            "entity_type": arguments.get("entity_type"),
+            "query_log": redact_for_log(str(arguments.get("entity_name") or arguments.get("query") or "")),
+        }
     cleaned = {}
     for key, value in arguments.items():
         if key == "proposal" and isinstance(value, dict):
             cleaned[key] = {"keys": sorted(value.keys())}
+        elif isinstance(value, str):
+            cleaned[key] = redact_for_log(value)
         else:
             cleaned[key] = value
     return cleaned

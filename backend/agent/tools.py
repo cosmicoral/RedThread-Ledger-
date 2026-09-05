@@ -3,8 +3,16 @@ from __future__ import annotations
 import json
 from typing import Any, Callable
 
+import logging
+
 from agent.models import ProposedJournalLine, ValidationResult
-from agent.sanitize import sanitize_search_query
+from agent.sanitize import (
+    ALLOWED_SEARCH_FIELDS,
+    build_external_search_query,
+    looks_like_account_or_narrative,
+)
+
+logger = logging.getLogger("redthread.agent")
 from journal import COUNTERPARTY_LEGS
 from matching.text import rank_matches
 from models import ReviewStatus, TransactionResult
@@ -105,6 +113,13 @@ def get_transaction_evidence(transaction_id: str) -> dict[str, Any]:
 
 def search_internal_master_data(query: str, entity_type: str) -> dict[str, Any]:
     """Search allowlisted master CSVs and return ranked candidates with sheet names."""
+    if looks_like_account_or_narrative(query):
+        return {
+            "query": "",
+            "entity_type": (entity_type or "").strip().lower(),
+            "candidates": [],
+            "error": "query_rejected",
+        }
     kind = (entity_type or "counterparty").strip().lower()
     targets = SEARCH_TARGETS.get(kind)
     if targets is None:
@@ -220,36 +235,81 @@ def validate_proposed_journal(proposal: Any, transaction: TransactionResult | No
     return result.model_dump()
 
 
+def _grounding_citations(payload: dict[str, Any]) -> list[dict[str, str]]:
+    rows = payload.get("grounding_citations")
+    if not isinstance(rows, list):
+        return []
+    citations: list[dict[str, str]] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        uri = str(row.get("uri") or "")
+        if not uri.startswith("https://"):
+            continue
+        citations.append(
+            {
+                "title": str(row.get("title") or ""),
+                "uri": uri,
+                "snippet": "",
+            }
+        )
+    return citations
+
+
 def search_external_sources(
-    query: str,
+    entity_name: str = "",
+    entity_type: str = "",
+    jurisdiction: str = "",
+    project_name: str = "",
     *,
-    narrative: str | None = None,
+    extra_fields: set[str] | None = None,
     search_fn: Callable[[str], dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Grounded web corroboration. Query is sanitized before any external call."""
-    cleaned = sanitize_search_query(query, narrative=narrative)
-    full_narrative = " ".join((narrative or "").split())
-    if not cleaned or (full_narrative and cleaned == full_narrative):
-        return {
-            "error": "query_rejected",
-            "query": "",
-            "results": [],
-            "citations": [],
-        }
+    """Grounded web corroboration. The search string is built only on the server."""
+    built = build_external_search_query(
+        entity_name=entity_name,
+        entity_type=entity_type,
+        jurisdiction=jurisdiction,
+        project_name=project_name,
+        extra_fields=extra_fields,
+    )
+    logger.info("external_search %s", built.query_log)
+    if built.rejected:
+        result = escalate_to_human(
+            "External search fields were unsafe or incomplete",
+            "Provide a clean entity name without account numbers, amounts, dates, or the full narrative",
+        )
+        result.update(
+            {
+                "error": "query_rejected",
+                "reason_code": built.reason,
+                "query_log": built.query_log,
+                "results": [],
+                "citations": [],
+            }
+        )
+        return result
     if search_fn is None:
         return {
             "error": "search_unavailable",
-            "query": cleaned,
+            "query_log": built.query_log,
             "results": [],
             "citations": [],
         }
-    payload = search_fn(cleaned)
-    payload["query"] = cleaned
-    return payload
+    payload = search_fn(built.query)
+    citations = _grounding_citations(payload if isinstance(payload, dict) else {})
+    return {
+        "query_log": built.query_log,
+        "results": payload.get("results") if isinstance(payload, dict) else [],
+        "citations": citations,
+    }
 
 
 def escalate_to_human(reason: str, missing_information: str) -> dict[str, Any]:
     """Return a clear unresolved result when evidence is insufficient or contradictory."""
+    if looks_like_account_or_narrative(reason) or looks_like_account_or_narrative(missing_information):
+        reason = "Escalated without repeating unsafe source text"
+        missing_information = "Reviewer must inspect the source document"
     return {
         "escalated": True,
         "reason": reason,
@@ -275,9 +335,15 @@ def dispatch_tool(
     if name == "validate_proposed_journal":
         return validate_proposed_journal(arguments.get("proposal") or arguments, transaction)
     if name == "search_external_sources":
+        extras = set(arguments) - ALLOWED_SEARCH_FIELDS
+        if "query" in arguments:
+            extras.add("query")
         return search_external_sources(
-            str(arguments.get("query") or ""),
-            narrative=transaction.evidence.narrative if transaction else None,
+            entity_name=str(arguments.get("entity_name") or ""),
+            entity_type=str(arguments.get("entity_type") or ""),
+            jurisdiction=str(arguments.get("jurisdiction") or ""),
+            project_name=str(arguments.get("project_name") or ""),
+            extra_fields=extras,
             search_fn=search_fn,
         )
     if name == "escalate_to_human":

@@ -1,11 +1,18 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
 from typing import Any, Callable
 
-from agent.client import AgentModel, GeminiModel, ModelTurn, grounded_search
+from agent.client import (
+    AgentModel,
+    GeminiModel,
+    ModelTurn,
+    default_model_content,
+    grounded_search,
+)
 from agent.models import (
     AgentReviewResult,
     AgentStatus,
@@ -16,11 +23,13 @@ from agent.models import (
     ToolTraceItem,
     ValidationResult,
 )
-from agent.sanitize import redact_for_log
+from agent.sanitize import format_provider_error, redact_for_log
 from agent.tools import dispatch_tool, require_needs_review, validate_proposed_journal
 from models import TransactionResult
 from runtime import get_transaction
 from settings import settings
+
+logger = logging.getLogger("redthread.agent")
 
 def _fallback(transaction: TransactionResult, reason: str, trace: list[ToolTraceItem] | None = None) -> AgentReviewResult:
     return AgentReviewResult(
@@ -206,18 +215,11 @@ def _loop(
                     "function_response": {
                         "name": call.name,
                         "response": payload,
+                        "id": call.id,
                     }
                 }
             )
-        contents.append(
-            {
-                "role": "model",
-                "parts": [
-                    {"function_call": {"name": call.name, "args": call.args}}
-                    for call in turn.function_calls
-                ],
-            }
-        )
+        contents.append(turn.model_content or default_model_content(turn))
         contents.append({"role": "user", "parts": responses})
         if escalated:
             break
@@ -315,4 +317,6 @@ def run_agent_review(
     except FuturesTimeout:
         return _fallback(item, f"Timed out after {settings.agent_timeout_seconds}s")
     except Exception as exc:  # noqa: BLE001 - convert provider failures into a reviewable fallback
-        return _fallback(item, f"Gemini unavailable: {exc.__class__.__name__}")
+        log_line, ui_reason = format_provider_error(exc)
+        logger.warning("%s", log_line)
+        return _fallback(item, ui_reason)

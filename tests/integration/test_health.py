@@ -11,6 +11,7 @@ def test_health_ok() -> None:
     body = response.json()
     assert body["status"] == "ok"
     assert "transactions" in body
+    assert body["agent_enabled"] is False
     assert client.get("/api/health").json() == body
 
 

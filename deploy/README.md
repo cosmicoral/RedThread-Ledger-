@@ -41,7 +41,7 @@ On the hackathon project, your user (or the Cloud Build service account used by 
 | `roles/cloudbuild.builds.editor` | Build the image from source |
 | `roles/artifactregistry.writer` | Push the image |
 
-The Cloud Run **runtime** service account does not need an API key. Do not set `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, or a Gemini key.
+The Cloud Run **runtime** service account does not need an API key. Leave `AGENT_ENABLED=false` unless you intentionally enable the optional Gemini review. Do not bake `GEMINI_API_KEY` into the image.
 
 ## 4. Deploy command (do not run until you are ready)
 

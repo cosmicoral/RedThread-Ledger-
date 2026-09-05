@@ -11,6 +11,11 @@ class Settings(BaseSettings):
     demo_data_dir: str = "data/demo"
     static_dir: str = ""
     cors_origins: str = "http://localhost:3000"
+    agent_enabled: bool = False
+    gemini_api_key: str = ""
+    gemini_model: str = "gemini-2.5-flash"
+    agent_timeout_seconds: float = 30.0
+    agent_max_tool_rounds: int = 4
 
 
 settings = Settings()

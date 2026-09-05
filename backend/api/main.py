@@ -6,13 +6,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
+from agent.models import AgentReviewResult
+from agent.runner import run_agent_review
 from models import ExceptionReason, ReviewStatus, TransactionResult
 from runtime import (
     current_queue,
     current_results,
+    get_agent_review,
     get_transaction,
     process_all,
     statement_path,
+    store_agent_review,
 )
 from settings import settings
 
@@ -46,6 +50,7 @@ def _health() -> dict:
     return {
         "status": "ok",
         "demo_mode": settings.demo_mode,
+        "agent_enabled": settings.agent_enabled,
         "transactions": len(current_results()),
     }
 
@@ -92,7 +97,29 @@ def get_queue() -> dict:
         "needs_review": grouped["needs_review"],
         "counts": _counts(items),
         "total": len(items),
+        "agent_enabled": settings.agent_enabled,
     }
+
+
+@api.post("/transactions/{transaction_id:path}/agent-review")
+def create_agent_review(transaction_id: str) -> AgentReviewResult:
+    item = get_transaction(transaction_id)
+    if item is None:
+        raise HTTPException(status_code=404, detail="Transaction not found")
+    review = run_agent_review(transaction_id)
+    store_agent_review(review)
+    return review
+
+
+@api.get("/transactions/{transaction_id:path}/agent-review")
+def read_agent_review(transaction_id: str) -> AgentReviewResult:
+    item = get_transaction(transaction_id)
+    if item is None:
+        raise HTTPException(status_code=404, detail="Transaction not found")
+    review = get_agent_review(transaction_id)
+    if review is None:
+        raise HTTPException(status_code=404, detail="Agent review not found")
+    return review  # type: ignore[return-value]
 
 
 @api.get("/transactions/{transaction_id:path}")

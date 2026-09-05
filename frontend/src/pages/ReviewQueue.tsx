@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiUrl } from "../api";
-import type { ExceptionReason, QueueResponse, TransactionResult } from "../types";
+import type {
+  AgentReviewResult,
+  AgentStep,
+  ExceptionReason,
+  QueueResponse,
+  TransactionResult,
+} from "../types";
 import { PdfEvidence } from "./PdfEvidence";
 
 const FILTERS: { key: string; label: string }[] = [
@@ -205,7 +211,9 @@ export function ReviewQueue() {
         )}
       </section>
 
-      {selected ? <Detail item={selected} /> : queue.total > 0 ? (
+      {selected ? (
+        <Detail item={selected} agentEnabled={Boolean(queue.agent_enabled)} />
+      ) : queue.total > 0 ? (
         <section className="panel state-panel">
           <h2>Select a transaction</h2>
           <p>Open a Ready to post or Needs review row to inspect evidence.</p>
@@ -215,7 +223,158 @@ export function ReviewQueue() {
   );
 }
 
-function Detail({ item }: { item: TransactionResult }) {
+const AGENT_STEPS: { key: AgentStep; label: string }[] = [
+  { key: "evidence", label: "Evidence" },
+  { key: "internal_lookup", label: "Internal lookup" },
+  { key: "external_research", label: "External research" },
+  { key: "validation", label: "Validation" },
+  { key: "recommendation", label: "Recommendation" },
+];
+
+function AgentPanel({
+  item,
+  agentEnabled,
+}: {
+  item: TransactionResult;
+  agentEnabled: boolean;
+}) {
+  const [review, setReview] = useState<AgentReviewResult | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setReview(null);
+    setError(null);
+    setBusy(false);
+  }, [item.transaction_id]);
+
+  const runReview = () => {
+    setBusy(true);
+    setError(null);
+    fetch(apiUrl(`/transactions/${encodeURIComponent(item.transaction_id)}/agent-review`), {
+      method: "POST",
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error(`Agent review failed (${response.status})`);
+        }
+        return response.json();
+      })
+      .then((data: AgentReviewResult) => setReview(data))
+      .catch((err: Error) => setError(err.message))
+      .finally(() => setBusy(false));
+  };
+
+  const done = new Set((review?.tool_trace || []).map((entry) => entry.step));
+  if (review) {
+    done.add("validation");
+    done.add("recommendation");
+  }
+
+  return (
+    <div className="agent-panel">
+      <h3>Agent review</h3>
+      <p>
+        Optional Gemini exception pass. It can propose a resolution but cannot
+        post, approve, or change the deterministic result.
+        {agentEnabled ? "" : " The agent flag is off; the request will fall back safely."}
+      </p>
+      {item.status === "needs_review" ? (
+        <button type="button" onClick={runReview} disabled={busy}>
+          {busy ? "Running agent review…" : "Run agent review"}
+        </button>
+      ) : (
+        <p className="empty">Agent review is only offered on Needs-review rows.</p>
+      )}
+      {error ? <p className="review-reason">{error}</p> : null}
+      {review ? (
+        <>
+          <ol className="agent-trace" aria-label="Agent step trace">
+            {AGENT_STEPS.map((step) => (
+              <li key={step.key} className={done.has(step.key) ? "done" : "pending"}>
+                {step.label}
+              </li>
+            ))}
+          </ol>
+          <p>
+            <strong>
+              {review.status === "agent_suggested" ? "Agent suggested" : "Needs human review"}
+            </strong>
+            {" · "}
+            confidence {(review.confidence * 100).toFixed(0)}%
+          </p>
+          <p>{review.summary}</p>
+          {review.fallback ? (
+            <p className="review-reason">
+              Fallback: {review.fallback_reason || "Gemini unavailable"}. Original
+              deterministic result is unchanged.
+            </p>
+          ) : null}
+          <p className="approval-banner">
+            Human approval required. The original Ready/Needs-review decision was
+            not modified.
+          </p>
+          {review.unresolved_questions.length > 0 ? (
+            <ul>
+              {review.unresolved_questions.map((question) => (
+                <li key={question}>{question}</li>
+              ))}
+            </ul>
+          ) : null}
+          {review.proposed_journal_lines.length > 0 ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Proposed account</th>
+                  <th>Type</th>
+                  <th>Debit</th>
+                  <th>Credit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {review.proposed_journal_lines.map((line, index) => (
+                  <tr key={`${line.account}-${index}`}>
+                    <td>{line.account}</td>
+                    <td>{line.transaction_type}</td>
+                    <td>{line.debit.toFixed(2)}</td>
+                    <td>{line.credit.toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : null}
+          {review.external_citations.length > 0 ? (
+            <ul>
+              {review.external_citations.map((citation) => (
+                <li key={citation.uri || citation.title}>
+                  {citation.uri ? (
+                    <a href={citation.uri} target="_blank" rel="noreferrer">
+                      {citation.title || citation.uri}
+                    </a>
+                  ) : (
+                    citation.title
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+          <p>
+            Deterministic validation:{" "}
+            {review.deterministic_validation.valid ? "passed" : "not passed"}
+          </p>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function Detail({
+  item,
+  agentEnabled,
+}: {
+  item: TransactionResult;
+  agentEnabled: boolean;
+}) {
   const chosen = item.candidates.filter((candidate) => candidate.chosen);
   const others = item.candidates.filter((candidate) => !candidate.chosen).slice(0, 6);
   const debit = item.journal_lines.reduce((sum, line) => sum + line.debit, 0);
@@ -313,6 +472,7 @@ function Detail({ item }: { item: TransactionResult }) {
 
       <h3>Source evidence</h3>
       <PdfEvidence documentName={item.evidence.document_name} page={item.evidence.page} />
+      <AgentPanel item={item} agentEnabled={agentEnabled} />
     </section>
   );
 }

@@ -45,6 +45,8 @@ Review UI (Ready to post / Needs review)
 
 The MVP is deterministic. No model API key is required. Matches are limited to supplied master data. Unsupported or ambiguous rows stay **Needs review**.
 
+An optional Gemini exception agent can investigate a Needs-review row when a person clicks **Run agent review**. It never posts, never approves, and never changes the original deterministic result. `AGENT_ENABLED` defaults to false.
+
 ```text
 redthread-ledger/
 ├── backend/            # extraction, matching, classification, journal, validation, API
@@ -102,7 +104,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r backend/requirements.txt
 cd frontend && npm install && cd ..
-cp .env.example .env   # optional; do not add API keys
+cp .env.example .env   # optional; do not add API keys unless enabling the agent
 make test
 make demo
 ```
@@ -132,7 +134,8 @@ make lint
 3. Confirm the summary: **100 extracted / 85 ready / 15 needs review**.
 4. Open a **Ready to post** bank-fee or Cephalus row. Check the source citation (`document · p.N`), chosen master-data row, and two balanced journal lines.
 5. Filter **Needs review**. Open a classification-review row. Confirm it was not given a invented counterparty, and that the PDF page still cites the source.
-6. Say aloud: RedThread proposes; a person approves.
+6. Optional: click **Run agent review** if `AGENT_ENABLED=true`. The original deterministic result must stay unchanged.
+7. Say aloud: RedThread proposes; a person approves.
 
 ## Cloud Run
 

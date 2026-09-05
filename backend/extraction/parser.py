@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import re
 from datetime import datetime
 
@@ -81,6 +82,40 @@ def parse_amount(value: str) -> float:
     return float(value.replace(",", ""))
 
 
+def _slug(value: str) -> str:
+    compact = re.sub(r"[^A-Za-z0-9._-]+", "_", (value or "").strip())
+    return compact.strip("_")[:48] or "-"
+
+
+def make_transaction_id(row: dict, ordinal: int) -> str:
+    """Deterministic ID: document, page, refs, amount, content hash, row ordinal."""
+    customer = " ".join((row.get("customer_reference") or "").split())
+    payload = "|".join(
+        [
+            str(row.get("document_name") or ""),
+            str(row.get("page") or ""),
+            str(row.get("bank_reference") or ""),
+            customer,
+            str(row.get("date") or ""),
+            f"{float(row.get('amount') or 0):.2f}",
+            str(row.get("trn_type") or ""),
+            " ".join((row.get("narrative") or "").split()),
+            str(ordinal),
+        ]
+    )
+    digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()[:12]
+    return (
+        f"{row.get('document_name')}:{row.get('page')}:"
+        f"{row.get('bank_reference') or '-'}:{_slug(customer)}:{digest}"
+    )
+
+
+def assign_transaction_ids(rows: list[dict]) -> list[dict]:
+    for ordinal, row in enumerate(rows, start=1):
+        row["transaction_id"] = make_transaction_id(row, ordinal)
+    return rows
+
+
 def parse_date(value: str) -> str:
     return datetime.strptime(value, "%d %b %Y").strftime("%Y-%m-%d")
 
@@ -141,9 +176,7 @@ def _row(
     narrative: str,
 ) -> dict:
     return {
-        "transaction_id": (
-            f"{document_name}:{page_number}:{bank_reference}:{value_date}:{signed}"
-        ),
+        "transaction_id": "",
         "document_name": document_name,
         "page": page_number,
         "account_name": header.get("account_name", ""),
@@ -296,5 +329,7 @@ def parse_statement_pages(
 ) -> list[dict]:
     combined = "\n".join(text for _, text in pages)
     if _looks_vertical(combined):
-        return parse_vertical_pages(pages, document_name)
-    return parse_horizontal_pages(pages, document_name)
+        rows = parse_vertical_pages(pages, document_name)
+    else:
+        rows = parse_horizontal_pages(pages, document_name)
+    return assign_transaction_ids(rows)

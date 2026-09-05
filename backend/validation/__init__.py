@@ -1,3 +1,4 @@
+from classification import implausible_bank_charge
 from models import ExceptionReason, ReviewStatus, TransactionResult
 
 INVESTMENT_CLASSES = {"Investment", "Investment Transfer"}
@@ -20,6 +21,8 @@ def validate_result(result: TransactionResult) -> TransactionResult:
         reasons.append(ExceptionReason.MISSING_EVIDENCE)
 
     classification = result.classification or ""
+    if implausible_bank_charge(result):
+        reasons.append(ExceptionReason.IMPLAUSIBLE_BANK_CHARGE)
     if classification == "Review":
         reasons.append(ExceptionReason.CLASSIFICATION_REVIEW)
 

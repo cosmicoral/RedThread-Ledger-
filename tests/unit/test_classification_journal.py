@@ -67,6 +67,74 @@ def test_cephalus_investment_transfer_is_balanced() -> None:
     assert round(sum(line.debit for line in result.journal_lines), 2) == 301908.70
 
 
+def test_charge_waived_outlier_is_held_for_review() -> None:
+    result = _run(
+        _row(
+            transaction_id="tx-waived-10m",
+            bank_reference="BQVRFRPP",
+            amount=-10_000_000,
+            narrative="BQVRFRPP, /448323310 CHARGE WAIVED",
+            trn_type="S+P-",
+        )
+    )
+    assert result.status.value == "needs_review"
+    assert any(reason.value == "implausible_bank_charge" for reason in result.exception_reasons)
+    assert not any(line.transaction_type == "Expense - Bank Charges" for line in result.journal_lines)
+    assert len(result.journal_lines) == 2
+    assert round(sum(line.debit for line in result.journal_lines), 2) == round(
+        sum(line.credit for line in result.journal_lines), 2
+    )
+
+
+def test_weak_fee_semantics_are_not_special_cased_by_id() -> None:
+    first = _run(
+        _row(
+            transaction_id="tx-waived-a",
+            amount=-2_000_000,
+            narrative="BQVRFRPP, /FR6239723540911169279904595 CHARGE WAIVED",
+        )
+    )
+    second = _run(
+        _row(
+            transaction_id="tx-waived-b",
+            amount=4_000_000,
+            narrative="1/NORDVIK INFRASTRUCTURE PARTNER, S+P+ CHARGE WAIVED",
+        )
+    )
+    assert first.transaction_id != second.transaction_id
+    for result in (first, second):
+        assert result.status.value == "needs_review"
+        assert any(reason.value == "implausible_bank_charge" for reason in result.exception_reasons)
+
+
+def test_outlier_commission_is_not_ready_to_post() -> None:
+    result = _run(
+        _row(
+            transaction_id="tx-huge-commission",
+            amount=-2_500_000,
+            narrative="COMMISSION USD 2500000, 16138PF705L0",
+            trn_type="S+P- CHG",
+        )
+    )
+    assert result.status.value == "needs_review"
+    assert any(reason.value == "implausible_bank_charge" for reason in result.exception_reasons)
+    assert not any(line.transaction_type == "Expense - Bank Charges" for line in result.journal_lines)
+
+
+def test_unmatched_high_value_is_not_posted_as_a_bank_charge() -> None:
+    result = _run(
+        _row(
+            transaction_id="tx-unmatched-high",
+            amount=-75_000,
+            narrative="FREJA MOERCH, 29513GJ86YTT, /DK0913720653727193",
+            trn_type="S+P-",
+        )
+    )
+    assert result.status.value == "needs_review"
+    assert result.classification == "Review"
+    assert not any(line.transaction_type == "Expense - Bank Charges" for line in result.journal_lines)
+
+
 def test_single_line_is_validation_failure() -> None:
     refs = _refs()
     matched = match_transaction(_row(), refs)

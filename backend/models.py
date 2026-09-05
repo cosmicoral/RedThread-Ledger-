@@ -14,6 +14,7 @@ class ExceptionReason(str, Enum):
     AMBIGUOUS_COUNTERPARTY = "ambiguous_counterparty"
     MISSING_POSITION = "missing_position"
     CLASSIFICATION_REVIEW = "classification_review"
+    IMPLAUSIBLE_BANK_CHARGE = "implausible_bank_charge"
     VALIDATION_FAILURE = "validation_failure"
     MISSING_EVIDENCE = "missing_evidence"
 

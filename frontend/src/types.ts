@@ -6,6 +6,7 @@ export type ExceptionReason =
   | "ambiguous_counterparty"
   | "missing_position"
   | "classification_review"
+  | "implausible_bank_charge"
   | "validation_failure"
   | "missing_evidence";
 

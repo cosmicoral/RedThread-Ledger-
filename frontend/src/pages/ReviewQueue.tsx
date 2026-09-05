@@ -12,6 +12,7 @@ const FILTERS: { key: string; label: string }[] = [
   { key: "ambiguous_counterparty", label: "Ambiguous counterparty" },
   { key: "missing_position", label: "Missing position" },
   { key: "classification_review", label: "Classification review" },
+  { key: "implausible_bank_charge", label: "Implausible bank charge" },
   { key: "validation_failure", label: "Validation failure" },
 ];
 
@@ -21,6 +22,7 @@ const REASON_LABEL: Record<ExceptionReason, string> = {
   ambiguous_counterparty: "More than one plausible counterparty",
   missing_position: "Deal or position could not be resolved",
   classification_review: "Classification needs a human decision",
+  implausible_bank_charge: "Bank-charge posting is implausible or weakly supported",
   validation_failure: "Journal lines failed a deterministic check",
   missing_evidence: "Source document or page is missing",
 };

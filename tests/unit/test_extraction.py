@@ -83,6 +83,28 @@ NI ABF I SCSP PROJECT CEPHALUS
     assert "PROJECT CEPHALUS" in rows[1]["narrative"]
 
 
+def test_commission_rows_with_shared_bank_fields_get_unique_ids() -> None:
+    text = """
+Account name NI GMF II SCSP
+Account number 240-644826-130
+Currency USD
+Bank reference Customer reference TRN type Value date Credit amount Debit amount Balance Time Post date
+TT YCB037B7GBGIU ATRIA TRF S+P- CHG 31 Mar 2026 -6.87 10.00 11:01 31 Mar 2026
+Narrative COMMISSION USD 6,87, 16138PF705L0
+TT TJK451YCABAJG INTERNAL TRF S+P- CHG 31 Mar 2026 -6.87 3.13 11:02 31 Mar 2026
+Narrative COMMISSION USD 6,87, 01104ZP014LE
+"""
+    rows = parse_statement_pages([(1, text)], document_name="commissions.pdf")
+    assert len(rows) == 2
+    assert rows[0]["bank_reference"] == rows[1]["bank_reference"]
+    assert rows[0]["amount"] == rows[1]["amount"]
+    assert rows[0]["date"] == rows[1]["date"]
+    assert rows[0]["customer_reference"] != rows[1]["customer_reference"]
+    assert rows[0]["transaction_id"] != rows[1]["transaction_id"]
+    assert rows[0]["customer_reference"].split()[0] in rows[0]["transaction_id"]
+    assert rows[1]["customer_reference"].split()[0] in rows[1]["transaction_id"]
+
+
 def test_second_page_number_and_interest() -> None:
     rows = parse_statement_pages(_pages(), document_name="statement.pdf")
     interest = next(row for row in rows if "CREDIT INTEREST" in row["narrative"])

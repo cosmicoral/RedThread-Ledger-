@@ -13,19 +13,70 @@ INVESTMENT_HINTS = (
     "CONTRIB",
 )
 
+STRONG_FEE_MARKERS = ("COMMISSION", "CHARGES FOR", "BANK FEE", "BANK CHARGES")
+WEAK_FEE_MARKERS = ("WAIVED", "WAIVER", "REBATE", "REFUND", "REVERSAL")
+# Statement bank fees/commissions are cents to tens of units. A four-figure
+# "fee" without other support is treated as implausible, not posted.
+PLAUSIBLE_BANK_CHARGE_ABS_MAX = 1_000.0
+
+
+def weak_fee_semantics(narrative: str) -> bool:
+    text = (narrative or "").upper()
+    return any(marker in text for marker in WEAK_FEE_MARKERS)
+
+
+def strong_fee_semantics(narrative: str, trn_type: str = "") -> bool:
+    """True only for explicit fee language. CHG type or WAIVED is not enough."""
+    del trn_type
+    text = (narrative or "").upper()
+    if weak_fee_semantics(text):
+        return False
+    return any(marker in text for marker in STRONG_FEE_MARKERS)
+
+
+def is_interest_narrative(narrative: str) -> bool:
+    text = (narrative or "").upper().strip()
+    return "CREDIT INTEREST" in text or text == "INTEREST"
+
+
+def implausible_bank_charge(result: TransactionResult) -> bool:
+    """Hold fee-like or default bank-charge postings that lack safe semantics."""
+    narrative = result.evidence.narrative or ""
+    amount = abs(float(result.amount or 0))
+    if is_interest_narrative(narrative):
+        return False
+    if result.classification == "Internal":
+        return False
+    if strong_fee_semantics(narrative, result.evidence.trn_type or ""):
+        return amount > PLAUSIBLE_BANK_CHARGE_ABS_MAX
+    posted_as_fee = (result.project_code or "") == "OH - Bank Fees" or (
+        result.transaction_type or ""
+    ) == "Expense - Bank Charges"
+    if posted_as_fee:
+        return True
+    if weak_fee_semantics(narrative) and result.classification in {None, "", "Other", "Review"}:
+        if result.counterparty or result.project_code:
+            return False
+        return True
+    return result.classification == "Other"
+
 
 def classify_transaction(result: TransactionResult) -> TransactionResult:
     narrative = (result.evidence.narrative or "").upper()
     notes: list[str] = []
 
-    if any(token in narrative for token in ("COMMISSION", "CHARGES FOR", "BANK FEE")) or (
-        result.evidence.trn_type or ""
-    ).endswith("CHG"):
+    if strong_fee_semantics(narrative, result.evidence.trn_type or ""):
+        amount = abs(float(result.amount or 0))
+        if amount > PLAUSIBLE_BANK_CHARGE_ABS_MAX:
+            result.classification = "Review"
+            notes.append("Bank-charge amount is outside a plausible fee range")
+            result.notes = "; ".join(filter(None, [result.notes, *notes]))
+            return result
         result.classification = "Other"
         result.project_code = result.project_code or "OH - Bank Fees"
         return result
 
-    if "CREDIT INTEREST" in narrative or "INTEREST" == narrative.strip():
+    if is_interest_narrative(narrative):
         result.classification = "Other"
         result.project_code = result.project_code or "OH - Interest Income"
         return result
@@ -74,5 +125,10 @@ def classify_transaction(result: TransactionResult) -> TransactionResult:
             result.classification = "Related Party"
         return result
 
-    result.classification = "Other"
+    result.classification = "Review"
+    if weak_fee_semantics(narrative):
+        notes.append("Weak fee language is not enough to post a bank charge")
+    else:
+        notes.append("No supported classification; do not invent a bank-charge posting")
+    result.notes = "; ".join(filter(None, [result.notes, *notes]))
     return result

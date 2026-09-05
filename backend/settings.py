@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     hackathon_statements_dir: str = "data/hackathon/bank-statements"
     hackathon_reference_dir: str = "data/hackathon/reference-data"
     demo_data_dir: str = "data/demo"
+    static_dir: str = ""
+    cors_origins: str = "http://localhost:3000"
 
 
 settings = Settings()

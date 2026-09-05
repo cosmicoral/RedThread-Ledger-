@@ -1,5 +1,11 @@
-# Raw source drop
+# Evaluation workbook (not a runtime input)
 
-Put the complete organiser dataset here locally. This directory is gitignored.
+Copy the official working file here locally if you want to run `make eval`:
 
-Do not commit the full source pack unless redistribution is explicitly approved.
+```text
+Bank statement to journal entries - working file (anonymised).xlsx
+```
+
+`evaluation/` is the only code that may open `Staging Sheet` or `DIU`.
+
+This directory is gitignored. Never commit the workbook.

@@ -6,340 +6,146 @@ RedThread Ledger turns bank statements and fund reference data into reviewable j
 
 Built for the **Ylookup × Encode Rebuild Private Markets AI Hackathon — Product Track**.
 
-> **Status:** Hackathon MVP under active development.  
-> The implementation was started from a new repository during the hackathon.
+> **Status:** Deterministic hackathon MVP. Human approval is required before any journal is posted.
 
 ## The problem
 
 Fund managers rely on administrators to prepare NAVs, financial statements and investor reporting, but the review process is often slow and repetitive.
 
-In the anonymised Ylookup interview provided for the hackathon, a fund manager described:
+In the anonymised Ylookup interview supplied for the hackathon, a fund manager described six or seven review turns for a single NAV, repeated fee errors, numbers that did not reconcile, and a review burden that stayed with the manager. Speed of one pass was not the issue. Trust was.
 
-- Six or seven review turns for a single NAV
-- Repeated errors in investor-specific fee calculations
-- Numbers that did not reconcile across statements
-- Limited quality control before work was returned
-- A review burden that remained with the fund manager
-
-The user was not primarily concerned about whether one turn took an hour or two days. The real cost was the number of turns required before the output could be trusted.
-
-RedThread Ledger addresses one part of that problem: converting bank activity into journal entries with a visible evidence trail and an explicit review queue.
-
-## The product
-
-RedThread Ledger processes a fund’s bank statements through six stages:
-
-1. Extract statement transactions
-2. Identify the legal entity and bank account
-3. Resolve the sender or beneficiary
-4. Match project codes, deals and positions
-5. Classify the transaction
-6. Generate and validate double-entry journal lines
-
-The product separates transactions into two outcomes:
-
-- **Ready to post** — required fields are resolved and validation checks pass
-- **Needs review** — evidence is missing, ambiguous or inconsistent
-
-RedThread does not invent a mapping when the source material does not support one.
-
-## Hackathon MVP
-
-The MVP focuses on the official **Bank Statements to Journal Entries** dataset.
-
-### Inputs
-
-- Seven anonymised bank statement PDFs
-- Bank account mappings
-- Legal entity, investor, vendor and related-party master lists
-- Project code mappings
-- Deal and position mappings
-- Chart of accounts
-- Allocation rules
-
-### Outputs
-
-For each transaction:
-
-- Bank reference
-- Source document and page
-- Transaction date, currency and amount
-- Extracted narrative
-- Matched legal entity
-- Matched counterparty
-- Project code
-- Classification
-- Transaction type
-- Deal and position, where applicable
-- Confidence and review status
-- Two proposed journal lines
-
-The final output can be exported in the structure required by the supplied `DIU` workbook.
-
-## User workflow
-
-### 1. Upload
-
-The user uploads one or more bank statements and selects the relevant fund reference data.
-
-### 2. Review exceptions
-
-RedThread shows a transaction-level queue:
-
-- Ready to post
-- Missing project
-- Ambiguous counterparty
-- Missing position
-- Classification review
-- Validation failure
-
-### 3. Inspect evidence
-
-Selecting a transaction shows:
-
-- The original statement row
-- The relevant narrative
-- The PDF page
-- Candidate master-data matches
-- The rule or model decision
-- The proposed journal lines
-
-### 4. Approve and export
-
-The user can:
-
-- Approve the proposal
-- Change a mapping
-- Mark the transaction for follow-up
-- Export validated journal entries
-
-## Example
-
-A bank narrative contains:
-
-```text
-PAYMENT FOR PURCHASE OF LOAN PRINCIPAL
-PROJECT CEPHALUS
-```
-
-RedThread links the transaction to:
-
-```text
-Project:        Cephalus
-Instrument:     Funding Loan
-Classification: Investment Transfer
-Status:         Ready to post
-```
-
-The evidence panel retains the original narrative, bank reference and PDF page alongside the matched deal and position.
-
-If the project or counterparty cannot be resolved from the supplied master data, the result is marked `Needs review` rather than silently guessed.
-
-## Why this is different
-
-Document AI tools often stop after extracting text.
-
-RedThread follows the full operational thread:
-
-```text
-source transaction
-        ↓
-extracted evidence
-        ↓
-master-data match
-        ↓
-accounting classification
-        ↓
-journal lines
-        ↓
-validation and human approval
-```
-
-The goal is not autonomous accounting. The goal is to reduce manual review while keeping every decision auditable.
+See [docs/problem-evidence.md](docs/problem-evidence.md).
 
 ## Architecture
 
 ```text
-Bank statement PDFs
+Seven statement PDFs + 12 allowlisted reference CSVs
         │
         ▼
-Transaction extraction
+Transaction extraction (digital PDF text)
         │
         ▼
-Entity and account resolution
+Legal entity / account resolution
         │
         ▼
-Counterparty and project matching
+Counterparty, project, deal, position matching
         │
         ▼
-Classification and position resolution
+Rule-based classification
         │
         ▼
-Double-entry rule engine
+Two balanced journal lines
         │
         ▼
-Validation and exception detection
+Deterministic validation
         │
         ▼
-Review UI and journal export
+Review UI (Ready to post / Needs review)
 ```
 
-The implementation separates probabilistic and deterministic work:
-
-- AI assists with narrative interpretation and semantic matching
-- Retrieval limits matches to known reference data
-- Accounting rules generate the journal structure
-- Deterministic checks validate required fields and debit/credit balance
-- Low-confidence or unsupported decisions go to human review
-
-## Evaluation
-
-The supplied working workbook is used as ground truth for evaluation, not as an application input.
-
-We measure:
-
-| Area | Metric |
-|---|---|
-| Statement extraction | Exact match for reference, date, currency and amount |
-| Counterparty resolution | Match accuracy against reviewed mappings |
-| Project resolution | Match accuracy and unsupported-match rate |
-| Classification | Accuracy by transaction category |
-| Position resolution | Exact match against reviewed positions |
-| Journal generation | Field-level and full-entry exact match |
-| Accounting validity | Two lines per batch and balanced debit/credit |
-| Exception handling | Precision and recall for `Needs review` |
-| Evidence | Valid source document and page reference |
-
-Known unmatched rows in the dataset are preserved deliberately. A correct system should identify uncertainty rather than force every transaction into a confident answer.
-
-To reduce leakage, evaluation splits are made at statement level. The ground-truth `Staging Sheet` and `DIU` sheets are never loaded by the production pipeline.
-
-## Quick start
-
-The submission is designed to run with one command:
-
-```bash
-make demo
-```
-
-Then open:
-
-```text
-http://localhost:3000
-```
-
-The repository includes anonymised demo fixtures. If no model API key is configured, the application starts in demo mode so the interface and evidence workflow can still be reviewed.
-
-For model-backed processing, copy the example environment file and add a key locally:
-
-```bash
-cp .env.example .env
-```
-
-Never commit API keys.
-
-## Development commands
-
-```bash
-make demo       # Start the application
-make test       # Run unit and integration tests
-make eval       # Evaluate against the held-out statements
-make lint       # Run code-quality checks
-```
-
-## Repository structure
+The MVP is deterministic. No model API key is required. Matches are limited to supplied master data. Unsupported or ambiguous rows stay **Needs review**.
 
 ```text
 redthread-ledger/
-├── README.md
-├── docs/
-│   └── problem-evidence.md
-├── data/
-│   ├── hackathon/
-│   │   ├── bank-statements/
-│   │   └── reference-data/
-│   └── demo/                 # Approved anonymised demo fixtures
-├── backend/
-│   ├── extraction/           # PDF and transaction extraction
-│   ├── matching/             # Entity, counterparty and project matching
-│   ├── classification/       # Transaction classification
-│   ├── journal/              # Double-entry generation
-│   ├── validation/           # Accounting and evidence checks
-│   └── api/                  # Application API
-├── frontend/                 # Review interface
+├── backend/            # extraction, matching, classification, journal, validation, API
+├── frontend/           # review queue
+├── data/hackathon/     # runtime inputs committed in-repo
+│   ├── bank-statements/
+│   └── reference-data/
+├── data/raw/           # evaluation workbook only (gitignored)
+├── evaluation/         # the only code that may open Staging Sheet / DIU
 ├── tests/
-│   ├── fixtures/
-│   ├── unit/
-│   └── integration/
-├── evaluation/               # Dataset evaluation harness
-├── .env.example
-├── .gitignore
+├── deploy/             # Cloud Run spec — not deployed from this repo by default
+├── Dockerfile          # single Cloud Run image
 ├── Makefile
-└── docker-compose.yml
+└── README.md
 ```
 
-## Scope
+## Data boundary
 
-### Included in the hackathon MVP
+| Runtime input | Forbidden at runtime |
+|---|---|
+| 7 anonymised statement PDFs | `Staging Sheet` |
+| 12 allowlisted reference CSVs | `DIU` |
+| Account Map, legal entity, investor, vendor, related party, project, deal/position, CoA, allocation, bank account, Korean/Taiwanese lists | Dataset 02 (GL loader) and dataset 03 (transcripts) |
 
-- Digital bank statement PDFs
-- Reference-data-assisted matching
-- Transaction classification
-- Deal and position resolution
-- Double-entry generation
-- Evidence citations
-- Human review queue
-- Excel export
-- Reproducible evaluation
+`evaluation/` is the only package that opens the working workbook. A unit test fails if backend code names those ground-truth sheets.
 
-### Stretch goal
+The official workbook may be copied to gitignored `data/raw/` for `make eval`. It is never an application input.
 
-Apply the same evidence and exception architecture to the supplied investor-level GL migration workflow:
+## Evaluation methodology
 
-- Map legal entities and accounts between systems
-- Resolve deals, positions and investors
-- Apply batch-type override rules
-- Reconcile movements before upload
-- Generate the target-system loader
+`make eval` runs the production pipeline on the seven PDFs, then compares output to the held-out `Staging Sheet` and `DIU` inside `evaluation/` only.
 
-### Out of scope for the hackathon
+| Area | What we score |
+|---|---|
+| Statement extraction | Currency and amount against the staging row |
+| Counterparty / project / classification / position | Exact normalised match when ground truth has a value |
+| Accounting validity | Exactly two journal lines and debit = credit |
+| Exception handling | Unmatched counterparties must not be invented |
+| Evidence | Source document name and page present |
 
-- Scanned-document OCR
-- Autonomous posting into a production accounting system
-- Legal or accounting approval
-- Technology and ESG due diligence
-- Full NAV production
-
-## Data handling
-
-The project uses anonymised hackathon data.
-
-Unless the organisers explicitly approve public redistribution, the complete source dataset should remain outside the repository and under a gitignored `data/raw/` directory. Only approved demo fixtures should be committed.
-
-The application does not require or store reversal keys, production credentials or real client data.
+Known unmatched rows are preserved on purpose. Leaving those as Needs review is a correct outcome.
 
 ## Limitations
 
-RedThread Ledger is a decision-support prototype.
+- A Ready-to-post label is still only a proposal. **Human approval is required.**
+- Position and classification accuracy remain below extraction quality; those rows should be reviewed.
+- Results depend on the completeness of the supplied master data.
+- The MVP does not post to a ledger, produce a NAV, or perform ESG / technology diligence.
+- Evaluation uses the official anonymised workbook as ground truth, not as an input.
 
-- A successful match does not constitute accounting approval
-- Low-confidence and unsupported mappings require human review
-- Results depend on the completeness of the supplied master data
-- Material journal entries should be reviewed by a qualified fund accountant
-- The current MVP is evaluated only on the supplied anonymised workflows
+## Setup
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
+cd frontend && npm install && cd ..
+cp .env.example .env   # optional; do not add API keys
+make test
+make demo
+```
+
+Open http://localhost:3000
+
+Runtime PDFs and reference CSVs are already in `data/hackathon/`. `make demo` does not need `DATASET_ROOT`.
+
+To run evaluation, place the official working workbook in `data/raw/` (or set `DATASET_ROOT` to the organiser pack) and run `make eval`. Never commit that workbook.
+
+```bash
+make test
+make eval
+make lint
+```
+
+## Screenshots
+
+![Review queue with 100 / 85 / 15 summary](docs/screenshots/queue-ready.png)
+
+![Needs-review transaction with evidence and journal lines](docs/screenshots/needs-review.png)
+
+## Two-minute demo flow
+
+1. Run `make demo` and open http://localhost:3000.
+2. Read the banner: **human approval required**.
+3. Confirm the summary: **100 extracted / 85 ready / 15 needs review**.
+4. Open a **Ready to post** bank-fee or Cephalus row. Check the source citation (`document · p.N`), chosen master-data row, and two balanced journal lines.
+5. Filter **Needs review**. Open a classification-review row. Confirm it was not given a invented counterparty, and that the PDF page still cites the source.
+6. Say aloud: RedThread proposes; a person approves.
+
+## Cloud Run
+
+A single-service image is prepared in the root `Dockerfile` and [deploy/README.md](deploy/README.md). It is **not deployed** from this repository by default and must not be given an API key.
 
 ## Hackathon submission
 
 - **Track:** Product Track
 - **Problem source:** Anonymised fund-manager NAV workflow interview
-- **Dataset:** Bank Statements to Journal Entries
-- **Demo video:** Add link before submission
-- **Live application:** Add link if deployed
+- **Dataset:** Bank Statements to Journal Entries (runtime PDFs + allowlisted sheets only)
 - **Run locally:** `make demo`
-
-## Team
-
-Add team members and roles here.
+- **Demo video:** Add link before submission
+- **Live application:** Add Cloud Run URL only after a separate deploy step
 
 ## Acknowledgements
 

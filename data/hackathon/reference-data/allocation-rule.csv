@@ -1,0 +1,27 @@
+Allocation Rules,Cash side,Counterpart side,,Legal Entity,Allocation Rule
+By Commitment & Closing Date,N/A,"For all entities, other than listed below",,Nordvik Infrastructure Advanced Bioenergy Fund I SCSp,NI ABF I SCSp (Exc GP & Initial LP)
+No Allocation,N/A,"Use this allocation rule when we have a newly incorporated entity. For example- GCF II, ABF II entities",,Nordvik Infrastructure Advanced Bioenergy Fund II SCSp,No Allocation
+Non-Dominant,Always,N/A,,Nordvik Infrastructure Growth Markets Fund II SCSp,NI GMF II SCSp (Excluding GP)
+NIP V EUR SCSp (excluding GP and initial partner),N/A,"For NI V EUR SCSp entity, use this allocation rule",,Nordvik Infrastructure V SCSp,NIP V EUR SCSp (excluding GP and initial partner)
+NI ABF I Feeder SCSp (Exc GP & Initial LP),N/A,"For ABF I Feeder SCSp entity, use this allocation rule",,,
+DAR: Deal,N/A,Use this allocation rule only when we have Korean/Taiwanese investment transactions under NI V SCSp.,,,
+NI ABF I SCSp (Exc GP & Initial LP),N/A,"For ABF I SCSp entity, use this allocation rule",,,
+NI GMF II SCSp (Excluding GP),N/A,"For NI GMF II SCSp entity, use this allocation rule",,,
+NI V US B SCSp (Exc GP and Intial partner),N/A,"For NI V US B SCSp entity, use this allocation rule",,,
+NI V US QFPF EUR SCSp (Exc GP and initial partner),N/A,"For NI V US QFPF EUR SCSp entity, use this allocation rule",,,
+NI V Non-QFPF SCSp (Exc GP and Initial Partner),N/A,"For NI V US Non QFPF EUR SCSp entity, use this allocation rule",,,
+NI V CN SCSp (Exc GP and Initial partner),N/A,"For NI V CN SCSp entity, use this allocation rule",,,
+NI GCF I SCSp (Excluding GP),N/A,"For NI GCF I SCSp entity, use this allocation rule",,,
+NI REG SCA (Exclu. GP),N/A,"For NI REG SCA entity, use this allocation rule",,,
+NI Reg SCSp (Excl. GP),N/A,"For NI REG SCSp entity, use this allocation rule",,,
+NIP V USD Feeder K/S (Exc GP and initial partner),N/A,"For NI V USD Feeder K/S entity, use this allocation rule",,,
+User Provided,N/A,Use this allocation rule when a management fees payment has been made,,,
+NI V NO SCSp (Exc Gp and Inital LP,N/A,"For NI V NO SCSp entity, use this allocation rule",,,
+NIP V USD Feeder (EXC Initial partner and GP),N/A,"For NI V USD Feeder entity, use this allocation rule",,,
+NI GCF I Non-SRT AIV SCSp (Excluding GP),N/A,"For NI GCF I Non SRT AIV SCSp entity, use this allocation rule",,,
+NIP V USD BLOCKER FEEDER SCSp (excluding GP and initial partner),N/A,"For NI V USD Blocker Feeder SCSp entity, use this allocation rule",,,
+NI GCF I Velaris SCSp (Excluding GP),N/A,"For NI GCF I Velaris SCSp entity, use this allocation rule",,,
+NIP V EUR Blocker Feeder SCSp (Excluding GP and initial partner),N/A,"For NI V EUR Blocker Feeder SCSp entity, use this allocation rule",,,
+NIP V Feeder SCA SICAV RAIF ( Exc GP an Initial Partner),N/A,"For NI V Feeder SCA SICAV RAIF entity, use this allocation rule",,,
+NI V FEEDER SICA - AIV COMPT ( EXC GP and Initial partner),N/A,"For NI V Feeder SCA SICAV AIV Compartment entity, use this allocation rule",,,
+NI GMF II Feeder SCSp (Excluding GP),N/A,"For NI GMF II Feeder SCSp entity, use this allocation rule",,,

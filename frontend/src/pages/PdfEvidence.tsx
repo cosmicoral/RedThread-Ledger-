@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
@@ -11,14 +11,19 @@ type Props = {
 
 export function PdfEvidence({ documentName, page }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [state, setState] = useState<"loading" | "ready" | "error">("loading");
 
   useEffect(() => {
-    if (!documentName || !canvasRef.current) {
+    if (!documentName) {
       return;
     }
     const canvas = canvasRef.current;
+    if (!canvas) {
+      return;
+    }
     const targetPage = page ?? 1;
     let cancelled = false;
+    setState("loading");
 
     const render = async () => {
       const pdf = await getDocument(`/statements/${encodeURIComponent(documentName)}`).promise;
@@ -29,14 +34,21 @@ export function PdfEvidence({ documentName, page }: Props) {
       const viewport = pdfPage.getViewport({ scale: 1.15 });
       const context = canvas.getContext("2d");
       if (!context) {
-        return;
+        throw new Error("canvas");
       }
       canvas.width = viewport.width;
       canvas.height = viewport.height;
       await pdfPage.render({ canvasContext: context, viewport, canvas }).promise;
+      if (!cancelled) {
+        setState("ready");
+      }
     };
 
-    void render().catch(() => undefined);
+    void render().catch(() => {
+      if (!cancelled) {
+        setState("error");
+      }
+    });
     return () => {
       cancelled = true;
     };
@@ -49,9 +61,24 @@ export function PdfEvidence({ documentName, page }: Props) {
   return (
     <div className="pdf-frame">
       <p className="pdf-caption">
-        {documentName} · page {page ?? "?"}
+        Source citation: {documentName} · page {page ?? "?"}
       </p>
-      <canvas ref={canvasRef} />
+      {state === "loading" ? <p className="empty">Loading PDF page…</p> : null}
+      {state === "error" ? (
+        <p className="empty">
+          Could not render the PDF page.{" "}
+          <a href={`/statements/${encodeURIComponent(documentName)}`} target="_blank" rel="noreferrer">
+            Open the source document
+          </a>
+        </p>
+      ) : null}
+      <canvas ref={canvasRef} hidden={state !== "ready"} />
+      {state !== "ready" ? (
+        <iframe
+          title="Source statement"
+          src={`/statements/${encodeURIComponent(documentName)}#page=${page ?? 1}`}
+        />
+      ) : null}
     </div>
   );
 }

@@ -1,8 +1,11 @@
 from contextlib import asynccontextmanager
 
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from models import ExceptionReason, ReviewStatus, TransactionResult
 from runtime import (
@@ -28,10 +31,11 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+_origins = [item.strip() for item in settings.cors_origins.split(",") if item.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
-    allow_credentials=True,
+    allow_origins=["*"] if _origins == ["*"] else _origins,
+    allow_credentials=False if _origins == ["*"] else True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -94,3 +98,8 @@ def read_statement(name: str) -> FileResponse:
     if path is None:
         raise HTTPException(status_code=404, detail="Statement not found")
     return FileResponse(path, media_type="application/pdf", filename=path.name)
+
+
+_static = Path(settings.static_dir) if settings.static_dir else Path("frontend/dist")
+if _static.is_dir():
+    app.mount("/", StaticFiles(directory=str(_static), html=True), name="ui")

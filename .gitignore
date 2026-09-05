@@ -1,47 +1,70 @@
-# Secrets
+# Secrets and credentials — never commit
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+credentials.json
+**/secrets/
+**/service-account*.json
 
 # Python
 .venv/
 venv/
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .coverage
+.coverage.*
+coverage.xml
 htmlcov/
 *.egg-info/
 dist/
 build/
+.tox/
+.cache/
 
 # Node
 node_modules/
+frontend/node_modules/
 frontend/dist/
 frontend/.vite/
 *.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+.turbo/
 
-# Hackathon source data — keep out of git unless organisers approve redistribution
+# Evaluation workbook and any answer-sheet drop — runtime must not use these
 data/raw/*
 !data/raw/README.md
-data/hackathon/bank-statements/*
-!data/hackathon/bank-statements/.gitkeep
-!data/hackathon/bank-statements/README.md
-data/hackathon/reference-data/*
-!data/hackathon/reference-data/.gitkeep
-!data/hackathon/reference-data/README.md
-
-# Local artefacts
-*.log
-.DS_Store
-.idea/
-.vscode/
 *.xlsx
 *.xls
 !tests/fixtures/**/*.xlsx
 
-# Docker
+# Local artefacts
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Docker / cloud
 .docker/
+.gcloud/
+*-key.json
+
+# Never commit ground-truth sheet extracts
+**/*staging*
+**/*Staging*
+**/*DIU*

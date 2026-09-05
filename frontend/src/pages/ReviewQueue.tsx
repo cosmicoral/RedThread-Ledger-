@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { QueueResponse, TransactionResult } from "../types";
+import type { ExceptionReason, QueueResponse, TransactionResult } from "../types";
 import { PdfEvidence } from "./PdfEvidence";
 
 const FILTERS: { key: string; label: string }[] = [
@@ -14,6 +14,16 @@ const FILTERS: { key: string; label: string }[] = [
   { key: "validation_failure", label: "Validation failure" },
 ];
 
+const REASON_LABEL: Record<ExceptionReason, string> = {
+  missing_project: "Project code could not be uniquely matched",
+  missing_counterparty: "No unique counterparty in the master lists",
+  ambiguous_counterparty: "More than one plausible counterparty",
+  missing_position: "Deal or position could not be resolved",
+  classification_review: "Classification needs a human decision",
+  validation_failure: "Journal lines failed a deterministic check",
+  missing_evidence: "Source document or page is missing",
+};
+
 function money(amount: number | null, currency: string | null): string {
   if (amount === null) {
     return "—";
@@ -25,13 +35,34 @@ function money(amount: number | null, currency: string | null): string {
   return currency ? `${value} ${currency}` : value;
 }
 
+function citation(item: TransactionResult): string {
+  const page = item.evidence.page ?? "?";
+  return `${item.evidence.document_name || "unknown document"} · p.${page}`;
+}
+
+function reviewReasons(item: TransactionResult): string[] {
+  if (item.exception_reasons.length === 0) {
+    return item.status === "needs_review" ? ["Held for human review"] : [];
+  }
+  return item.exception_reasons.map((reason) => REASON_LABEL[reason] || reason);
+}
+
+function journalBalanced(item: TransactionResult): boolean {
+  const debit = item.journal_lines.reduce((sum, line) => sum + line.debit, 0);
+  const credit = item.journal_lines.reduce((sum, line) => sum + line.credit, 0);
+  return item.journal_lines.length === 2 && Math.round((debit - credit) * 100) === 0;
+}
+
 export function ReviewQueue() {
   const [queue, setQueue] = useState<QueueResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [filter, setFilter] = useState("all");
+  const initialFilter = new URLSearchParams(window.location.search).get("filter") || "all";
+  const [filter, setFilter] = useState(initialFilter);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  useEffect(() => {
+  const load = () => {
+    setError(null);
+    setQueue(null);
     fetch("/queue")
       .then(async (response) => {
         if (!response.ok) {
@@ -41,6 +72,10 @@ export function ReviewQueue() {
       })
       .then((data: QueueResponse) => setQueue(data))
       .catch((err: Error) => setError(err.message));
+  };
+
+  useEffect(() => {
+    load();
   }, []);
 
   const items = useMemo(() => {
@@ -54,27 +89,60 @@ export function ReviewQueue() {
     if (filter === "ready_to_post" || filter === "needs_review") {
       return all.filter((item) => item.status === filter);
     }
-    return all.filter((item) => item.exception_reasons.includes(filter as TransactionResult["exception_reasons"][number]));
+    return all.filter((item) =>
+      item.exception_reasons.includes(filter as ExceptionReason),
+    );
   }, [queue, filter]);
 
   const selected =
     items.find((item) => item.transaction_id === selectedId) ?? items[0] ?? null;
 
   if (error) {
-    return <p className="empty">Could not load the review queue. Is the API running?</p>;
+    return (
+      <main className="panel state-panel">
+        <h2>Could not load the review queue</h2>
+        <p>{error}. Confirm the API is running on port 8000, then retry.</p>
+        <button type="button" onClick={load}>
+          Retry
+        </button>
+      </main>
+    );
   }
   if (!queue) {
-    return <p className="empty">Loading review queue…</p>;
+    return (
+      <main className="panel state-panel">
+        <h2>Loading review queue</h2>
+        <p>Extracting statements and matching allowlisted reference data…</p>
+      </main>
+    );
   }
 
   return (
     <main className="workspace">
       <section className="panel">
+        <div className="summary-strip" aria-label="Queue summary">
+          <div>
+            <strong>{queue.total}</strong>
+            <span>extracted</span>
+          </div>
+          <div>
+            <strong>{queue.counts.ready_to_post}</strong>
+            <span>ready to post</span>
+          </div>
+          <div>
+            <strong>{queue.counts.needs_review}</strong>
+            <span>needs review</span>
+          </div>
+        </div>
+        <p className="approval-banner">
+          Human approval required. RedThread proposes journal lines; it does not
+          post, approve, or replace a fund accountant.
+        </p>
         <div className="panel-header">
           <h2>Review queue</h2>
           <p>
-            {queue.total} extracted transactions · {queue.counts.ready_to_post} ready ·{" "}
-            {queue.counts.needs_review} need review
+            {queue.total} / {queue.counts.ready_to_post} / {queue.counts.needs_review}
+            {" "}· extracted / ready / review
           </p>
         </div>
         <ul className="filters">
@@ -82,7 +150,17 @@ export function ReviewQueue() {
             <li key={item.key}>
               <button
                 className={filter === item.key ? "active" : ""}
-                onClick={() => setFilter(item.key)}
+                onClick={() => {
+                  setFilter(item.key);
+                  const params = new URLSearchParams(window.location.search);
+                  if (item.key === "all") {
+                    params.delete("filter");
+                  } else {
+                    params.set("filter", item.key);
+                  }
+                  const query = params.toString();
+                  window.history.replaceState(null, "", query ? `?${query}` : "/");
+                }}
                 type="button"
               >
                 {item.label}
@@ -95,11 +173,13 @@ export function ReviewQueue() {
             </li>
           ))}
         </ul>
-        {items.length === 0 ? (
+        {queue.total === 0 ? (
           <p className="empty">
-            No transactions in this bucket. Run <code>make sync-data</code> then
-            restart the API if the queue is empty.
+            No statements loaded. The seven hackathon PDFs should live in{" "}
+            <code>data/hackathon/bank-statements/</code>.
           </p>
+        ) : items.length === 0 ? (
+          <p className="empty">No transactions in this filter.</p>
         ) : (
           <ul className="queue">
             {items.map((item) => (
@@ -112,6 +192,7 @@ export function ReviewQueue() {
                   <span>
                     <em>{item.evidence.bank_reference || "No ref"}</em>
                     {item.classification || "Unclassified"}
+                    <small>{citation(item)}</small>
                   </span>
                   <strong>{money(item.amount, item.currency)}</strong>
                 </button>
@@ -121,7 +202,12 @@ export function ReviewQueue() {
         )}
       </section>
 
-      {selected ? <Detail item={selected} /> : null}
+      {selected ? <Detail item={selected} /> : queue.total > 0 ? (
+        <section className="panel state-panel">
+          <h2>Select a transaction</h2>
+          <p>Open a Ready to post or Needs review row to inspect evidence.</p>
+        </section>
+      ) : null}
     </main>
   );
 }
@@ -129,15 +215,28 @@ export function ReviewQueue() {
 function Detail({ item }: { item: TransactionResult }) {
   const chosen = item.candidates.filter((candidate) => candidate.chosen);
   const others = item.candidates.filter((candidate) => !candidate.chosen).slice(0, 6);
+  const debit = item.journal_lines.reduce((sum, line) => sum + line.debit, 0);
+  const credit = item.journal_lines.reduce((sum, line) => sum + line.credit, 0);
+  const reasons = reviewReasons(item);
 
   return (
     <section className="panel detail">
+      <p className="approval-banner">
+        Human approval required before this proposal can be posted.
+      </p>
       <div className="panel-header">
         <h2>{item.status === "ready_to_post" ? "Ready to post" : "Needs review"}</h2>
         <p>
-          {item.classification || "No classification"} · {item.legal_entity || "No legal entity"}
+          {item.classification || "No classification"} · confidence{" "}
+          {(item.confidence * 100).toFixed(0)}%
         </p>
       </div>
+      <p className="citation">Source citation: {citation(item)}</p>
+      {reasons.length > 0 ? (
+        <p className="review-reason">Review reason: {reasons.join("; ")}</p>
+      ) : (
+        <p className="review-reason">Review reason: none — still requires human approval.</p>
+      )}
 
       <dl className="facts">
         <div>
@@ -157,10 +256,6 @@ function Detail({ item }: { item: TransactionResult }) {
             {item.project_code || "No project"} · {item.position || "No position"}
           </dd>
         </div>
-        <div>
-          <dt>Exceptions</dt>
-          <dd>{item.exception_reasons.join(", ") || "None"}</dd>
-        </div>
       </dl>
 
       <h3>Master-data match</h3>
@@ -175,34 +270,43 @@ function Detail({ item }: { item: TransactionResult }) {
           </li>
         ))}
         {others.map((candidate) => (
-          <li key={`${candidate.sheet}-${candidate.key}`}>
+          <li key={`${candidate.sheet}-${candidate.key}-alt`}>
             Candidate {candidate.field}: {candidate.label} · {candidate.sheet} ·{" "}
             {candidate.score.toFixed(2)}
           </li>
         ))}
       </ul>
 
-      <h3>Proposed journal</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Account</th>
-            <th>Type</th>
-            <th>Debit</th>
-            <th>Credit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {item.journal_lines.map((line, index) => (
-            <tr key={`${line.account}-${index}`}>
-              <td>{line.account}</td>
-              <td>{line.transaction_type}</td>
-              <td>{line.debit.toFixed(2)}</td>
-              <td>{line.credit.toFixed(2)}</td>
+      <h3>Proposed journal {journalBalanced(item) ? "(balanced)" : "(not balanced)"}</h3>
+      {item.journal_lines.length === 0 ? (
+        <p className="empty">No journal lines proposed.</p>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Account</th>
+              <th>Type</th>
+              <th>Debit</th>
+              <th>Credit</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {item.journal_lines.map((line, index) => (
+              <tr key={`${line.account}-${index}`}>
+                <td>{line.account}</td>
+                <td>{line.transaction_type}</td>
+                <td>{line.debit.toFixed(2)}</td>
+                <td>{line.credit.toFixed(2)}</td>
+              </tr>
+            ))}
+            <tr>
+              <td colSpan={2}>Totals</td>
+              <td>{debit.toFixed(2)}</td>
+              <td>{credit.toFixed(2)}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
 
       <h3>Source evidence</h3>
       <PdfEvidence documentName={item.evidence.document_name} page={item.evidence.page} />

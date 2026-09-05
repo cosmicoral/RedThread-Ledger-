@@ -1,7 +1,7 @@
-# Bank statements
+# Bank statements (runtime input)
 
-Place the official anonymised hackathon PDFs here locally.
+Seven anonymised digital PDFs from the official **Bank Statements to Journal Entries** pack.
 
-These files stay out of git unless the organisers explicitly approve redistribution. See `data/raw/` in `.gitignore` for the complete source drop.
+These files are application inputs. They are committed so `make demo` works from a clone.
 
-Expected for the MVP: seven anonymised bank statement PDFs.
+The working workbook (`Staging Sheet`, `DIU`) is **not** stored here. Keep that file in gitignored `data/raw/` for `make eval` only.

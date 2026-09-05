@@ -43,6 +43,7 @@ export type TransactionResult = {
   classification: string | null;
   deal: string | null;
   position: string | null;
+  confidence: number;
   status: ReviewStatus;
   exception_reasons: ExceptionReason[];
   evidence: {

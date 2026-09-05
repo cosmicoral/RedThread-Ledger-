@@ -7,8 +7,8 @@ DATASET_ROOT ?= /Users/yuhan/Downloads/Ylookup Hackathon Datasets/01-bank-statem
 help:
 	@echo "RedThread Ledger"
 	@echo ""
-	@echo "  make demo       Sync data if needed and start the app (http://localhost:3000)"
-	@echo "  make sync-data  Copy PDFs and extract allowlisted reference sheets"
+	@echo "  make demo       Start the app from committed runtime data (http://localhost:3000)"
+	@echo "  make sync-data  Optional: refresh PDFs/CSVs and copy the eval workbook"
 	@echo "  make test       Run unit and integration tests"
 	@echo "  make eval       Evaluate against held-out statements"
 	@echo "  make lint       Run code-quality checks"
@@ -17,7 +17,7 @@ help:
 sync-data:
 	DATASET_ROOT="$(DATASET_ROOT)" PYTHONPATH=backend $(PYTHON) -m reference.sync
 
-demo: sync-data
+demo:
 	$(MAKE) -j2 demo-backend demo-frontend
 
 demo-backend:

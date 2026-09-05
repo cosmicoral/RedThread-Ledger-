@@ -6,8 +6,7 @@ services:
       - "${BACKEND_PORT:-8000}:8000"
     environment:
       DEMO_MODE: ${DEMO_MODE:-true}
-      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
       DATA_DIR: /data
       HACKATHON_STATEMENTS_DIR: /data/hackathon/bank-statements
       HACKATHON_REFERENCE_DIR: /data/hackathon/reference-data

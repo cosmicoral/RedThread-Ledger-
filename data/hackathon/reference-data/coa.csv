@@ -1,0 +1,559 @@
+Account,Account Short Description,Account Type,GL Account Code,Trans Type,Is Active,Account Active or Inactive
+10000,Cash - On Hand,Assets,10000,Cash - Disbursed,Yes,Active
+10000,Cash - On Hand,Assets,10000,Cash - FX Gain/Loss,Yes,Active
+10000,Cash - On Hand,Assets,10000,Cash - On Hand,Yes,Active
+10000,Cash - On Hand,Assets,10000,Cash - Received,Yes,Active
+10000,Cash - On Hand,Assets,10000,Cash - Unrealized FX Gain/Loss,Yes,Active
+10000.1,Cash - EUR,Assets,10000.1,Cash - Disbursed - EUR,Yes,Active
+10000.1,Cash - EUR,Assets,10000.1,Cash - FX Gain/Loss - EUR,Yes,Active
+10000.1,Cash - EUR,Assets,10000.1,Cash - Received - EUR,Yes,Active
+10000.1,Cash - NOK,Assets,10000.1,Cash - Disbursed - NOK,Yes,Active
+10000.1,Cash - NOK,Assets,10000.1,Cash - FX Gain/Loss - NOK,Yes,Active
+10000.1,Cash - NOK,Assets,10000.1,Cash - Received - NOK,Yes,Active
+10000.11,Cash - SEK,Assets,10000.11,Cash - Disbursed - SEK,Yes,Active
+10000.11,Cash - SEK,Assets,10000.11,Cash - FX Gain/Loss - SEK,Yes,Active
+10000.11,Cash - SEK,Assets,10000.11,Cash - Received - SEK,Yes,Active
+10000.12,Cash - DKK,Assets,10000.12,Cash - Disbursed - DKK,Yes,Active
+10000.12,Cash - DKK,Assets,10000.12,Cash - FX Gain/Loss - DKK,Yes,Active
+10000.12,Cash - DKK,Assets,10000.12,Cash - Received - DKK,Yes,Active
+10000.13,Cash - AUD,Assets,10000.13,Cash - AUD,Yes,Active
+10000.13,Cash - AUD,Assets,10000.13,Cash - Disbursed - AUD,Yes,Active
+10000.13,Cash - AUD,Assets,10000.13,Cash - FX Gain/Loss - AUD,Yes,Active
+10000.13,Cash - AUD,Assets,10000.13,Cash - Received - AUD,Yes,Active
+10000.14,Cash - IDR,Assets,10000.14,Cash - Disbursed - IDR,Yes,Active
+10000.14,Cash - IDR,Assets,10000.14,Cash - FX Gain/Loss - IDR,Yes,Active
+10000.14,Cash - IDR,Assets,10000.14,Cash - Received - IDR,Yes,Active
+10000.15,Cash - PHP,Assets,10000.15,Cash - Disbursed - PHP,Yes,Active
+10000.15,Cash - PHP,Assets,10000.15,Cash - FX Gain/Loss - PHP,Yes,Active
+10000.15,Cash - PHP,Assets,10000.15,Cash - PHP,Yes,Active
+10000.15,Cash - PHP,Assets,10000.15,Cash - Received - PHP,Yes,Active
+10000.16,Cash - KRW,Assets,10000.16,Cash - Disbursed - KRW,Yes,Active
+10000.16,Cash - KRW,Assets,10000.16,Cash - FX Gain/Loss - KRW,Yes,Active
+10000.16,Cash - KRW,Assets,10000.16,Cash - KRW,Yes,Active
+10000.16,Cash - KRW,Assets,10000.16,Cash - Received - KRW,Yes,Active
+10000.17,Cash - THB,Assets,10000.17,Cash - Disbursed - THB,Yes,Active
+10000.17,Cash - THB,Assets,10000.17,Cash - FX Gain/Loss - THB,Yes,Active
+10000.17,Cash - THB,Assets,10000.17,Cash - Received - THB,Yes,Active
+10000.17,Cash - THB,Assets,10000.17,Cash - THB,Yes,Active
+10000.18,Cash - MYR,Assets,10000.18,Cash - Disbursed - MYR,Yes,Active
+10000.18,Cash - MYR,Assets,10000.18,Cash - FX Gain/Loss - MYR,Yes,Active
+10000.18,Cash - MYR,Assets,10000.18,Cash - MYR,Yes,Active
+10000.18,Cash - MYR,Assets,10000.18,Cash - Received - MYR,Yes,Active
+10000.19,Cash - CHF,Assets,10000.19,Cash - Disbursed - CHF,Yes,Active
+10000.19,Cash - CHF,Assets,10000.19,Cash - FX Gain/Loss - CHF,Yes,Active
+10000.19,Cash - CHF,Assets,10000.19,Cash - Received - CHF,Yes,Active
+10000.2,Cash - USD,Assets,10000.2,Cash - Disbursed - USD,Yes,Active
+10000.2,Cash - USD,Assets,10000.2,Cash - FX Gain/Loss - USD,Yes,Active
+10000.2,Cash - USD,Assets,10000.2,Cash - Received - USD,Yes,Active
+10000.21,Cash - CAD,Assets,10000.21,Cash - Disbursed - CAD,Yes,Active
+10000.21,Cash - CAD,Assets,10000.21,Cash - FX Gain/Loss - CAD,Yes,Active
+10000.21,Cash - CAD,Assets,10000.21,Cash - Received - CAD,Yes,Active
+10000.22,Cash - NZD,Assets,10000.22,Cash - Disbursed - NZD,Yes,Active
+10000.22,Cash - NZD,Assets,10000.22,Cash - FX Gain/Loss - NZD,Yes,Active
+10000.22,Cash - NZD,Assets,10000.22,Cash - Received - NZD,Yes,Active
+10000.23,Cash - ISK,Assets,10000.23,Cash - Disbursed - ISK,Yes,Active
+10000.23,Cash - ISK,Assets,10000.23,Cash - FX Gain/Loss - ISK,Yes,Active
+10000.23,Cash - ISK,Assets,10000.23,Cash - Received - ISK,Yes,Active
+10000.24,Cash - ZAR,Assets,10000.24,Cash - Disbursed - ZAR,Yes,Active
+10000.24,Cash - ZAR,Assets,10000.24,Cash - FX Gain/Loss - ZAR,Yes,Active
+10000.24,Cash - ZAR,Assets,10000.24,Cash - Received - ZAR,Yes,Active
+10000.25,Cash - PLN,Assets,10000.25,Cash - Disbursed - PLN,Yes,Active
+10000.25,Cash - PLN,Assets,10000.25,Cash - FX Gain/Loss - PLN,Yes,Active
+10000.25,Cash - PLN,Assets,10000.25,Cash - Received - PLN,Yes,Active
+10000.26,Cash - VND,Assets,10000.26,Cash - VND,Yes,Active
+10000.27,Cash - HRK,Assets,10000.27,Cash - Disbursed - HRK,Yes,Active
+10000.27,Cash - HRK,Assets,10000.27,Cash - FX Gain/Loss - HRK,Yes,Active
+10000.27,Cash - HRK,Assets,10000.27,Cash - Received - HRK,Yes,Active
+10000.3,Cash - SGD,Assets,10000.3,Cash - Disbursed - SGD,Yes,Active
+10000.3,Cash - SGD,Assets,10000.3,Cash - FX Gain/Loss - SGD,Yes,Active
+10000.3,Cash - SGD,Assets,10000.3,Cash - Received - SGD,Yes,Active
+10000.4,Cash - RMB,Assets,10000.4,Cash - Disbursed - RMB,Yes,Active
+10000.4,Cash - RMB,Assets,10000.4,Cash - FX Gain/Loss - RMB,Yes,Active
+10000.4,Cash - RMB,Assets,10000.4,Cash - Received - RMB,Yes,Active
+10000.5,Cash - JPY,Assets,10000.5,Cash - Disbursed - JPY,Yes,Active
+10000.5,Cash - JPY,Assets,10000.5,Cash - FX Gain/Loss - JPY,Yes,Active
+10000.5,Cash - JPY,Assets,10000.5,Cash - Received - JPY,Yes,Active
+10000.6,Cash - INR,Assets,10000.6,Cash - Disbursed - INR,Yes,Active
+10000.6,Cash - INR,Assets,10000.6,Cash - FX Gain/Loss - INR,Yes,Active
+10000.6,Cash - INR,Assets,10000.6,Cash - Received - INR,Yes,Active
+10000.7,Cash - HKD,Assets,10000.7,Cash - Disbursed - HKD,Yes,Active
+10000.7,Cash - HKD,Assets,10000.7,Cash - FX Gain/Loss - HKD,Yes,Active
+10000.7,Cash - HKD,Assets,10000.7,Cash - Received - HKD,Yes,Active
+10000.8,Cash - TWD,Assets,10000.8,Cash - Disbursed - TWD,Yes,Active
+10000.8,Cash - TWD,Assets,10000.8,Cash - FX Gain/Loss - TWD,Yes,Active
+10000.8,Cash - TWD,Assets,10000.8,Cash - IDR,Yes,Active
+10000.8,Cash - TWD,Assets,10000.8,Cash - Received - TWD,Yes,Active
+10000.8,Cash - TWD,Assets,10000.8,Cash - TWD,Yes,Active
+10000.9,Cash - GBP,Assets,10000.9,Cash - Disbursed - GBP,Yes,Active
+10000.9,Cash - GBP,Assets,10000.9,Cash - FX Gain/Loss - GBP,Yes,Active
+10000.9,Cash - GBP,Assets,10000.9,Cash - Received - GBP,Yes,Active
+10000.996,Bank Deposits,Assets,10000.996,Bank Deposits,Yes,Active
+10000.997,Deposits,Assets,10000.997,Cash - Deposits,Yes,Active
+10000.997,Deposits,Assets,10000.997,Cash - FX Gain/Loss - Deposits,Yes,Active
+10000.997,Deposits,Assets,10000.997,Fixed Deposits,Yes,Active
+10000.998,Cash - SPV,Assets,10000.998,Cash - Disbursed - SPV,Yes,Active
+10000.998,Cash - SPV,Assets,10000.998,Cash - FX Gain/Loss - SPV,Yes,Active
+10000.998,Cash - SPV,Assets,10000.998,Cash - Received - SPV,Yes,Active
+10000.999,Cash - Spot Clearing,Assets,10000.999,Cash - Spot Clearing Credits,Yes,Active
+10000.999,Cash - Spot Clearing,Assets,10000.999,Cash - Spot Clearing Debits,Yes,Active
+10000.999,Cash - Spot Clearing,Assets,10000.999,Cross Account - Credit,Yes,Active
+10000.999,Cash - Spot Clearing,Assets,10000.999,Cross Account - Debit,Yes,Active
+11000,L - Investments,Assets,11000,Conversion Out,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Broken deals,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Capitalized Management expense,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Conversion - Purchase - Capitalized Income,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Conversion - Purchase - Cost,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Conversion - Sale - Capitalized Income,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Conversion - Sale - Cost,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - PIK Interest  Repayment,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - PIK Interest Capitalization,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Purchase,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Redemption,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Syndication,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Return of Capital (Recallable),Yes,Active
+11000.01,Investments - Options,Assets,11000.01,Investments - Options,Yes,Active
+11000.02,Investments,Assets,11000.02,Investments,Yes,Active
+11200,L - Investments - Discounts & Premiums,Assets,11200,Investments - Loan - Discount Received,Yes,Active
+11200,L - Investments - Discounts & Premiums,Assets,11200,Investments - Loan - Premium Paid,Yes,Active
+11500,L - Investments - Market Adjustments,Assets,11500,Investments - Loan - Capitalized Expense (B/S),Yes,Active
+11500,L - Investments - Market Adjustments,Assets,11500,Investments - Loan - Realized Gain/Loss (B/S),Yes,Active
+11500,L - Investments - Market Adjustments,Assets,11500,Investments - Loan - Unrealized Gain/Loss (B/S),Yes,Active
+11500.1,Investment - FMV Adjustment,Assets,11500.1,Investments - FMV Adjustment,Yes,Active
+11600,L - Investments - FX Adjustment,Assets,11600,Investments - Loan - Realized FX Gain/Loss (B/S),Yes,Active
+11600,L - Investments - FX Adjustment,Assets,11600,Investments - Loan - Unrealized FX Gain/Loss (B/S),Yes,Active
+11700,L - Investments - Long term accrued Interest,Assets,11700,Accrued Income - Investment Interest - Cash - Long Term,Yes,Active
+11700,L - Investments - Long term accrued Interest,Assets,11700,Accrued Income - Investment Interest - Cash - Long Term - Reversal,Yes,Active
+11700.1,L - Investments - Capitalized Interest,Assets,11700.1,Investments - Capitalized Interest,Yes,Active
+11700.1,L - Investments - Capitalized Interest,Assets,11700.1,Investments - Capitalized Interest Repayment,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Broken Deals,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Capitalized expense,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Conversion - Purchase - Capitalized Income,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Conversion - Purchase - Cost,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Conversion - Sale - Capitalized Income,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Conversion - Sale - Cost,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Purchase,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Return of Capital,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Return of Capital (Recallable),Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Syndication,Yes,Active
+12000,E - Investments,Assets,12000,Investments - FoF - Investments,Yes,Active
+12000,E - Investments,Assets,12000,Investments - FoF - Return of Capital (Non recallable),Yes,Active
+12000,E - Investments,Assets,12000,Investments - FoF - Return of Capital (Recallable),Yes,Active
+12500,E - Investments - Market Adjustments,Assets,12500,Investments - Equity - Dividends (B/S),Yes,Active
+12500,E - Investments - Market Adjustments,Assets,12500,Investments - Equity - Realized Gain/Loss (B/S),Yes,Active
+12500,E - Investments - Market Adjustments,Assets,12500,Investments - Equity - Unrealized Gain/Loss (B/S),Yes,Active
+12500,E - Investments - Market Adjustments,Assets,12500,Investments - FoF - Unrealized Gain/Loss (B/S),Yes,Active
+12600,E - Investments - FX Adjustment,Assets,12600,Investments - Equity - Realized FX Gain/Loss (B/S),Yes,Active
+12600,E - Investments - FX Adjustment,Assets,12600,Investments - Equity - Unrealized FX Gain/Loss (B/S),Yes,Active
+12600,E - Investments - FX Adjustment,Assets,12600,Investments - FoF - Unrealized FX Gain/Loss (B/S),Yes,Active
+13000,P - Investments,Assets,13000,Investments - Property - Capitalized Expense,Yes,Active
+13000,P - Investments,Assets,13000,Investments - Property - Purchase,Yes,Active
+13000,P - Investments,Assets,13000,Investments - Property - Return of Capital,Yes,Active
+13000,P - Investments,Assets,13000,Investments - Property - Return of Capital (Recallable),Yes,Active
+13500,P - Investments - Market Adjustments,Assets,13500,Investments - Property - Unrealized Gain/Loss (B/S),Yes,Active
+13600,P - Investments - FX Adjustments,Assets,13600,Investments - Property - Unrealized FX Gain/Loss (B/S),Yes,Active
+14000,S - Investments,Assets,14000,Investments - Share Capital - Increase,Yes,Active
+14000,S - Investments,Assets,14000,Investments - Share Premium - Increase,Yes,Active
+14000,S - Investments,Assets,14000,Investments - Subsidary - Increase,Yes,Active
+15000,O - Investments,Assets,15000,Investments - Other - Return of Capital (B/S),Yes,Active
+15000,O - Investments,Assets,15000,Investments - Other - Return of Capital (Recallable),Yes,Active
+15000,O - Investments,Assets,15000,Investments - Other - Share Conversion (B/S),Yes,Active
+15000,O - Investments,Assets,15000,Investments - Other - Shareholder Debt (B/S),Yes,Active
+15000,O - Investments,Assets,15000,Investments - Other- Interest (B/S),Yes,Active
+15000,O - Investments,Assets,15000,Investments - Other- Purchase (B/S),Yes,Active
+15500,O - Investments - Market Adjustments,Assets,15500,Investments - Equity Pick Up,Yes,Active
+15500,O - Investments - Market Adjustments,Assets,15500,Investments - Other - Unrealized Gain/Loss (B/S),Yes,Active
+15600,O - Investments - FX Adjustments,Assets,15600,Investments - Other - Unrealized FX Gain/Loss (B/S),Yes,Active
+16000,L - Interest Accrued,Assets,16000,Accrued Income - Investment Interest - Cash,Yes,Active
+16000,L - Interest Accrued,Assets,16000,Accrued Income - Investment Interest - Cash - Reversal,Yes,Active
+16000,L - Interest Accrued,Assets,16000,Accrued Income - Investment Interest - PIK,Yes,Active
+16000,L - Interest Accrued,Assets,16000,Accrued Income - Investment Interest - PIK - Reversal,Yes,Active
+16000,L - Interest Accrued,Assets,16000,Receivable - Investment Interest - Cash - Invoiced,Yes,Active
+16000,L - Interest Accrued,Assets,16000,Receivable - Investment Interest - FX Gain/Loss,Yes,Active
+16000.1,Interest Receivable,Assets,16000.1,Interest Receivable,Yes,Active
+16000.2,Interest Receivable - Senior loan,Assets,16000.2,Interest Receivable - Senior loan,Yes,Active
+16000.3,Interest Receivable - Junior loan,Assets,16000.3,Interest Receivable - Junior loan,Yes,Active
+16100,Accounts Receivable (Inv Rel),Assets,16100,Receivable - Accounts Receivable - Provision (Inv Rel) - Reversal,Yes,Active
+16100,Accounts Receivable (Inv Rel),Assets,16100,Receivable - Accounts Receivable (Inv Rel),Yes,Active
+16100,Accounts Receivable (Inv Rel),Assets,16100,Receivable - Directors Fees (Inv Rel)(B/S),Yes,Active
+16100,Accounts Receivable (Inv Rel),Assets,16100,Receivable - Investments,Yes,Active
+16100,Accounts Receivable (Inv Rel),Assets,16100,Receivable - Project Costs (Inv Rel),Yes,Active
+16100.1,Receivables,Assets,16100.1,Receivable,Yes,Active
+16100.2,Receivable - Related Party,Assets,16100.2,Receivable - Related Party,Yes,Active
+16100.3,Receivables - Third Party,Assets,16100.3,Receivable - Third Party,Yes,Active
+16100.4,Receivable - Deferred Income,Assets,16100.4,Receivable - Deferred Income,Yes,Active
+16100.5,Receivable - Subsequent Close Interest,Assets,16100.5,Receivable - Subsequent Close Interest,Yes,Active
+16100.6,FX Forward Contract Receivable,Assets,16100.6,FX Forward Contract Receivable,Yes,Active
+16200,E - Dividend Receivable,Assets,16200,Receivable - Dividend (Inv Rel),Yes,Active
+16300,Escrow,Assets,16300,Escrow,Yes,Active
+16400.1,Deferred Upfront Fees,Assets,16400.1,Deferred Upfront Fees,Yes,Active
+16500,Tax - Receivable (Inv Rel),Assets,16500,Tax - Receivable - Receivable (Inv Rel),Yes,Active
+16600,Loans Receivable,Assets,16600,Loans Receivable,Yes,Active
+17000,Accounts Receivable (Non Inv Rel),Assets,17000,Receivable - Due From Related Parties - Release (Non Inv Rel),Yes,Active
+17000,Accounts Receivable (Non Inv Rel),Assets,17000,Receivable - Due From Related Parties (Non Inv Rel),Yes,Active
+17000,Accounts Receivable (Non Inv Rel),Assets,17000,Receivable - Other - Provision (Non Inv Rel),Yes,Active
+17000,Accounts Receivable (Non Inv Rel),Assets,17000,Receivable - Other (Non Inv Rel),Yes,Active
+17000.1,Rental Income Receivable,Assets,17000.1,Rent - Receivable,Yes,Active
+17000.3,Lease Income Receivable,Assets,17000.3,Lease Income - Receivable,Yes,Active
+17100,Prepaid Expenses - Non Inv Rel,Assets,17100,Prepaid Expenses - Management Fees (Non Inv Rel),Yes,Active
+17100.1,Prepayments,Assets,17100.1,Prepayments,Yes,Active
+17100.2,Prepaid Management Fees,Assets,17100.2,Prepaid Management Fees,Yes,Active
+17100.3,Deferred Expense,Assets,17100.3,Deferred Expense,Yes,Active
+17100.4,Management Fees Receivable,Assets,17100.4,Receivable - Management Fees,Yes,Active
+17500,Tax - Receivable (Non Inv Rel),Assets,17500,Tax - Receivable (Non Inv Rel),Yes,Active
+17550.1,Deferred Tax Asset,Assets,17550.1,Deferred Tax Asset,Yes,Active
+17550.1,Deferred Tax Asset,Assets,17550.1,Non-Current Deferred Tax Asset,Yes,Active
+18000,LP Contributions - Calls Receivable,Assets,18000,Receivable - Capital Call Receivable,Yes,Active
+18000,LP Contributions - Calls Receivable,Assets,18000,Receivable - Capital Call Receivable - Received,Yes,Active
+18000.1,Due From Investors,Assets,18000.1,Due From Investors,Yes,Active
+19000,Fixed Asset,Assets,19000,Fixed Asset,Yes,Active
+19100,Accumulated Depreciation,Assets,19100,Accumulated Depreciation,Yes,Active
+20000,Accounts Payable (Inv Rel),Liabilities,20000,Payable - Other (Inv Rel),Yes,Active
+20000,Accounts Payable (Inv Rel),Liabilities,20000,Payable - Project Cost (Loan Rel),Yes,Active
+20500,Accounts Payable (Non Inv Rel),Liabilities,20500,Payable - Due to Related Parties - Release  (Non Inv Rel),Yes,Active
+20500,Accounts Payable (Non Inv Rel),Liabilities,20500,Payable - Due to Related Parties (Non Inv Rel),Yes,Active
+20500,Accounts Payable (Non Inv Rel),Liabilities,20500,Payable - Other (Non Inv Rel),Yes,Active
+20500,Accounts Payable (Non Inv Rel),Liabilities,20500,Payable - Other Current (Non Inv Rel),Yes,Active
+20500,Accounts Payable (Non Inv Rel),Liabilities,20500,Payable - Other Non Current (Non Inv Rel),Yes,Active
+20500.1,Payable - Related Party,Liabilities,20500.1,Payable - Related Party,Yes,Active
+20500.2,FX Options Payable,Liabilities,20500.2,FX Options Payable,Yes,Active
+20500.3,Due to Investors,Liabilities,20500.3,Due to Investors,Yes,Active
+20500.4,Accounts Payable,Liabilities,20500.4,Accounts Payable,Yes,Active
+20500.5,Payable - Third Party,Liabilities,20500.5,Payable - Third Party,Yes,Active
+20500.6,FX Forward Contract Payable,Liabilities,20500.6,FX Forward Contract Payable,Yes,Active
+20500.7,Payable – Advisory fees,Liabilities,20500.7,Payable – Advisory fees,Yes,Active
+20500.8,Payable - FX Swap,Liabilities,20500.8,Payable - FX Swap,Yes,Active
+21000,Funding Loans - Short Term (Non Inv Rel),Liabilities,21000,Funding Loan - Short Term - Issued (Non Inv Rel),Yes,Active
+21050,Funding Loans - Long Term (Non Inv Rel),Liabilities,21050,Funding Loan - Long Term - Issued (Non Inv Rel),Yes,Active
+21050.1,Loans Payable,Liabilities,21050.1,Loan - Capitalized Expenses (B/S),Yes,Active
+21050.1,Loans Payable,Liabilities,21050.1,Loan - Discount Received,Yes,Active
+21050.1,Loans Payable,Liabilities,21050.1,Loan - PIK Interest Capitalization,Yes,Active
+21050.1,Loans Payable,Liabilities,21050.1,Loan - Unrealized Gain/Loss (B/S),Yes,Active
+21050.1,Loans Payable,Liabilities,21050.1,Loans Payable,Yes,Active
+21075,Bank Loans,Liabilities,21075,Bank Loans,Yes,Active
+21100,Payable - Interest (Non Inv Rel),Liabilities,21100,Accrued Expense - Funding Interest - Accrued (Non Inv Rel),Yes,Active
+21100.1,Payable - Interest,Liabilities,21100.1,Payable - Interest,Yes,Active
+21100.2,Interest Rate Swap Payable,Liabilities,21100.2,Interest Rate Swap Payable,Yes,Active
+21100.3,Carried Interest Payable,Liabilities,21100.3,Carried Interest Payable,Yes,Active
+21100.4,Payable - Interest - Related Party,Liabilities,21100.4,Payable - Interest - Related Party,Yes,Active
+21200,Dividends Payable,Liabilities,21200,Payable - Dividend,Yes,Active
+21300,Capital Call - Paid in Advance,Liabilities,21300,Capital Call - Paid in Advance,Yes,Active
+22000,Payable - Management Fees (Non Inv Rel),Liabilities,22000,Accrued Expense - Management Fee - Accrued (Non Inv Rel),Yes,Active
+23000,Accrued Expense (Non Inv Rel),Liabilities,23000,Accrued Expense - General - Accrued (Non Inv Rel),Yes,Active
+23000,Accrued Expense (Non Inv Rel),Liabilities,23000,Accrued Expense - General - Paid (Non Inv Rel),Yes,Active
+23000,Accrued Expense (Non Inv Rel),Liabilities,23000,Accrued Expense - Organisational - Accrued (Non inv Rel),Yes,Active
+23000.1,Accrued Expense,Liabilities,23000.1,Accrued Expense,Yes,Active
+23000.1,Withholding Taxes accruals,Liabilities,23000.1,Accrued Expense - Withholding,Yes,Active
+23000.11,Withholding Taxes reversal,Liabilities,23000.11,Accrued Expense - Withholding - Reversal,Yes,Active
+23000.2,Accrued Expense - Audit,Liabilities,23000.2,Accrued Expense - Audit - Payable,Yes,Active
+23000.5,Accrued Expense – Administration Fees,Liabilities,23000.5,Accrued Expense – Administration Fees - Payable,Yes,Active
+23000.6,Premium expenses accrued,Liabilities,23000.6,Accrued Expense - Premium,Yes,Active
+23000.7,Premium expenses reversal,Liabilities,23000.7,Accrued Expense - Premium - Reversal,Yes,Active
+23000.8,Transaction costs accrued,Liabilities,23000.8,Accrued Expense - Transaction Cost,Yes,Active
+23000.9,Transaction costs reversal,Liabilities,23000.9,Accrued Expense - Transaction Cost - Reversal,Yes,Active
+24000,Rent Expense Payable,Liabilities,24000,Rent - Payable,Yes,Active
+24000.1,Rent In Advance,Liabilities,24000.1,Rent In Advance,Yes,Active
+25000,Lease Expense Payable,Liabilities,25000,Lease Expense - Payable,Yes,Active
+25100,Lease Liability,Liabilities,25100,Lease Liability - Current,Yes,Active
+25100,Lease Liability,Liabilities,25100,Lease Liability - Non Current,Yes,Active
+26500,Tax - Payable (Inv Rel),Liabilities,26500,Tax - Payable - Payable (Inv Rel),Yes,Active
+27500,Tax - Payable (Non Inv Rel),Liabilities,27500,Tax - Payable - Payable (Non Inv Rel),Yes,Active
+27550,Tax - Deferred Tax Expense,Liabilities,27550,Tax - Defered Tax Expense (B/S),Yes,Active
+27560,Payable - GAAP adjustmen,Liabilities,27560,Payable - GAAP adjustment,Yes,Active
+27600,VAT Control Account,Liabilities,27600,VAT - Paid On Invoice,Yes,Active
+27600,VAT Control Account,Liabilities,27600,VAT - Received On Invoice,Yes,Active
+27600,VAT Control Account,Liabilities,27600,VAT - Reverse Charge,Yes,Active
+28000,Deferred Income,Liabilities,28000,Deferred Income,Yes,Active
+29000,Payable - Syndication Costs,Liabilities,29000,Payable - Syndication Costs,Yes,Active
+29100,Payable - Subsequent Close Interest,Liabilities,29100,Payable - Subsequent Close Interest,Yes,Active
+30000,Partners Capital,Capital,30000,Capital - Partners Capital - Decrease,Yes,Active
+30000,Partners Capital,Capital,30000,Capital - Partners Capital - Increase,Yes,Active
+30010,Partners Capital - Loan,Capital,30010,Capital Call - Loan,Yes,Active
+30020,Contributions - Deemed GP Contribution,Capital,30020,Capital Call - Deemed GP Contribution,Yes,Active
+30050,Share Capital,Capital,30050,Capital - Decrease of Share capital,Yes,Active
+30050,Share Capital,Capital,30050,Capital - Increase of Share Capital,Yes,Active
+30050,Share Capital,Capital,30050,Share Capital - Decrease,Yes,Active
+30050,Share Capital,Capital,30050,Share Capital - Increase,Yes,Active
+30060,Capital Reserve,Capital,30060,Capital Reserve - Decrease,Yes,Active
+30060,Capital Reserve,Capital,30060,Capital Reserve - Increase,Yes,Active
+30070,Share Premium Reserve,Capital,30070,Capital - Decrease of Share Premium Reserve,Yes,Active
+30070,Share Premium Reserve,Capital,30070,Capital - Increase of Share Premium Reserve,Yes,Active
+30070,Share Premium Reserve,Capital,30070,Share Premium - Decrease,Yes,Active
+30070,Share Premium Reserve,Capital,30070,Share Premium - Increase,Yes,Active
+30100,LP Contributions - Investments,Capital,30100,Capital Call - Contributions Returned,Yes,Active
+30100,LP Contributions - Investments,Capital,30100,Capital Call - Investments,Yes,Active
+30100,LP Contributions - Investments,Capital,30100,Capital Call - Investments (In-Kind),Yes,Active
+30100,LP Contributions - Investments,Capital,30100,Capital Call - Refund of Fund - Investments,Yes,Active
+30100,LP Contributions - Investments,Capital,30100,Capital Call - Subsidiary,Yes,Active
+30200,LP Contributions - Management Fees,Capital,30200,Capital Call - Management Fee (aff cmt)(non inv rel),Yes,Active
+30200,LP Contributions - Management Fees,Capital,30200,Capital Call - Management Fee (n/a cmt)(non inv rel),Yes,Active
+30200,LP Contributions - Management Fees,Capital,30200,Capital Call - Refund of Fund - Management Fee (aff cmt)(Non inv rel),Yes,Active
+30200,LP Contributions - Management Fees,Capital,30200,Capital Call - Refund of Fund - Management Fee (n/a cmt)(non inv rel),Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Capitalized Acquisition Costs,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Interest,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Merak Investor Expense,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - NonRecoverable Sales Tax,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Organisational Expenses (aff cmt),Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Other Fund Expenses (aff cmt)(non inv rel),Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Other Fund Expenses (n/a cmt)(non inv rel),Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Partnership Expenses,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,"Capital Call - Partnership Expenses -  Accounting, Administration & IT",Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Partnership Expenses – Audit & Tax Preparatory,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Partnership Expenses – Bank Fees,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Partnership Expenses – Custody Fees,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Partnership Expenses – Due Diligence,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Partnership Expenses – Legal,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Partnership Expenses – Other Travel & Entertainment,Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Partnership Expenses (n/a cmt) (non inv rel),Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Refund of Fund - Orgnisational Expenses (aff cmt)(Non Inv Rel),Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Refund of Fund - Other Fund Expenses (aff cmt)(non inv rel),Yes,Active
+30300,LP Contributions - Other Fund Expenses,Capital,30300,Capital Call - Refund of Fund - Other Fund Expenses (n/a cmt)(non inv rel),Yes,Active
+30400,LP Contributions - Interest Expense (Bridge),Capital,30400,Capital Call - Interest Expense (Bridge),Yes,Active
+30400,LP Contributions - Interest Expense (Bridge),Capital,30400,Capital Call - Refund of Fund - Interest Expense (Bridge),Yes,Active
+30500,LP Contributions - Interest for Late Closing,Capital,30500,Capital Call - Interest for Late Closing,Yes,Active
+30500,LP Contributions - Interest for Late Closing,Capital,30500,Capital Call - Refund of Fund - Interest for Late Closing,Yes,Active
+30500,LP Contributions - Interest for Late Closing,Capital,30500,Distribution - Return of Capital (In-Kind),Yes,Active
+30600,LP Contributions - Placement Agent Fees,Capital,30600,Capital Call - Placement Agent Fees,Yes,Active
+30900,LP Contributions - Working Capital,Capital,30900,Capital Call - Refund of Fund - Working Capital,Yes,Active
+30900,LP Contributions - Working Capital,Capital,30900,Capital Call - Working Capital,Yes,Active
+31000,LP Transfer,Capital,31000,LP Transfer (In),Yes,Active
+31000,LP Transfer,Capital,31000,LP Transfer (Out),Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distribution - Recycled Expenses,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distribution - Return of Capital,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distribution - Return of Capital - Recallable,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distributions - Net of Management Fees,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distributions - Net of Management Fees Offset,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distributions - Net of Recoverable Sales Tax,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distributions - Return of Capital - Cash,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distributions - Return of Capital - Management Fees,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distributions - Return of Capital - Options,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distributions - Return of Capital - Partnership Expenses,Yes,Active
+35000,LP Distributions - Return of Capital,Capital,35000,Distributions - Return of Capital - Stock,Yes,Active
+35100,LP Distributions - Realized Gains/Losses,Capital,35100,Distribution - Realized Gain/Loss,Yes,Active
+35100,LP Distributions - Realized Gains/Losses,Capital,35100,Distribution - Realized Gain/Loss - Recallable,Yes,Active
+35100,LP Distributions - Realized Gains/Losses,Capital,35100,Distribution - Realized Gain/Loss Recallable for Management Fees,Yes,Active
+35100,LP Distributions - Realized Gains/Losses,Capital,35100,Distribution - Realized Gain/Loss Recallable for Partnership Expenses,Yes,Active
+35110,LP Distributions - Realized Gain,Capital,35110,Distributions - Realized Gain - Cash,Yes,Active
+35110,LP Distributions - Realized Gain,Capital,35110,Distributions - Realized Gain - Stock,Yes,Active
+35120,LP Distributions - Realized Loss,Capital,35120,Distributions - Realized Loss - Cash,Yes,Active
+35120,LP Distributions - Realized Loss,Capital,35120,Distributions - Realized Loss - Stock,Yes,Active
+35130,LP Distributions - Return of Excess Capital Called,Capital,35130,Distributions - Return of Excess Capital Called,Yes,Active
+35200,LP Distributions - Dividends,Capital,35200,Distribution - Dividends - Gross,Yes,Active
+35200,LP Distributions - Dividends,Capital,35200,Distribution - Dividends - Witholding Tax,Yes,Active
+35300,LP Distributions - Interest,Capital,35300,Distribution - Interest - Gross,Yes,Active
+35300,LP Distributions - Interest,Capital,35300,Distribution - Interest - Witholding Tax,Yes,Active
+35300,LP Distributions - Interest,Capital,35300,Distributions - Interest for Late Closing,Yes,Active
+35400,LP Distributions - Other Income,Capital,35400,Distribution - Other Income,Yes,Active
+35400,LP Distributions - Other Income,Capital,35400,Distribution - Other Income - Recallable,Yes,Active
+35400,LP Distributions - Other Income,Capital,35400,Distribution - Other Income Recallable for Management Fees,Yes,Active
+35400,LP Distributions - Other Income,Capital,35400,Distribution - Other Income Recallable for Partnership Expenses,Yes,Active
+35400,LP Distributions - Other Income,Capital,35400,Distributions - Investment Income GAAP only,Yes,Active
+35500,GP Distributions - Carried interest,Capital,35500,Distribution - GP Carried Interest,Yes,Active
+35600,LP Distributions - Preferred Return,Capital,35600,Distribution - Preferred Return,Yes,Active
+35700,GP Distributions – Preferred Return,Capital,35700,Distribution - GP Preferred Return,Yes,Active
+35800,LP Distributions - Clawback,Capital,35800,Distributions - Clawback,Yes,Active
+35900,LP Distributions - Temp Return of Capital,Capital,35900,Distributions - Temporary Return of Capital - Investment,Yes,Active
+35900,LP Distributions - Temp Return of Capital,Capital,35900,Distributions - Temporary Return of Capital - Management Fees,Yes,Active
+35900,LP Distributions - Temp Return of Capital,Capital,35900,Distributions - Temporary Return of Capital - Partnership Expenses,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - AL Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - CA Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - CDN Corp Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - ECI Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - FED Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - FL Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - GA Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - Holdback,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - IRE Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - JPY Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - KS Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - MI Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - NYC Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - NYS Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - Payable,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - Payable - Paid,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - SC Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - US Corp Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - US State Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - UT Withholding Tax,Yes,Active
+36000,LP Distributions - Payable,Capital,36000,Distribution - Withholding Tax,Yes,Active
+37000,Syndication Costs,Capital,37000,Placement Agent Fees,Yes,Active
+37000,Syndication Costs,Capital,37000,Syndication Costs,Yes,Active
+39000,Retained Earnings,Capital,39000,Fiscal Year Close,Yes,Active
+39000,Retained Earnings,Capital,39000,Fiscal Year Close F/X,Yes,Active
+39000,Retained Earnings,Capital,39000,Fund Capital - Retained Earnings,Yes,Active
+39000,Retained Earnings,Capital,39000,Retained Earnings - Expenses,Yes,Active
+39000,Retained Earnings,Capital,39000,Retained Earnings - Income,Yes,Active
+39100,Unrealised Gain/Loss Reserve,Capital,39100,Unrealised Gain/Loss Reserve,Yes,Active
+39100.1,Unrealised Gain/Loss Reserve - FX,Capital,39100.1,Unrealised Gain/Loss Reserve - FX,Yes,Active
+39200,Realised Gain/Loss Reserve,Capital,39200,Realised Gain/Loss on Disposal,Yes,Active
+39200.1,Realised Gain/Loss Reserve - FX,Capital,39200.1,Realised Gain/Loss on Disposal - FX,Yes,Active
+39300,Reserves - Warrant Instrument Reserve,Capital,39300,Warrant Instrument Reserve,Yes,Active
+39300.1,Reserves - Hedging,Capital,39300.1,Swap Fair Value Reserve,Yes,Active
+39500,GP - Carry Partners Account (Unrealized),Capital,39500,GP Profit Reallocation - Carried Interest (B/S) (Unrealized) (Non Inv Rel),Yes,Active
+39500,GP - Carry Partners Account (Unrealized),Capital,39500,INT BE: Principal Drawdown - Interest Security,Yes,Active
+39500,GP - Carry Partners Account (Unrealized),Capital,39500,INT BE: Principal Paydown - Interest Security,Yes,Active
+39500,GP - Carry Partners Account (Unrealized),Capital,39500,INT BE: Purchase - Interest Security,Yes,Active
+39500,GP - Carry Partners Account (Unrealized),Capital,39500,INT BE: Purchase PIK,Yes,Active
+39500,GP - Carry Partners Account (Unrealized),Capital,39500,INT BE: Return of Capital (ROC) - Interest Security,Yes,Active
+39500,GP - Carry Partners Account (Unrealized),Capital,39500,Partners Transfer,Yes,Active
+39500.1,Provision for Carried Interest,Capital,39500.1,Provision for Carried Interest,Yes,Active
+39600,GP - Carry Partners Account (Realized),Capital,39600,GP Profit Reallocation - Carried Interest (B/S) (Realized) (Non Inv Rel),Yes,Active
+39600,GP - Carry Partners Account (Realized),Capital,39600,GP Profit Reallocation - Carried Interest (B/S)(Realized)(Cash Movement)(Non Inv Rel),Yes,Active
+39980,Currency Correcting,Capital,39980,Currency Correcting Credit,Yes,Active
+39980,Currency Correcting,Capital,39980,Currency Correcting Debit,Yes,Active
+39990,Suspense Account,Capital,39990,Beginning Balance,Yes,Active
+39990,Suspense Account,Capital,39990,Suspense,Yes,Active
+39990,Suspense Account,Capital,39990,Suspense (credit),Yes,Active
+39990,Suspense Account,Capital,39990,Suspense (debit),Yes,Active
+40000,Expense - Management Fee (Non Inv Rel),Expenses,40000,Expense - Management Fees (Non Inv Rel),Yes,Active
+40000.1,Expense - Management Fees,Expenses,40000.1,Expense - Management Fee,Yes,Active
+40000.2,Expense - Advisory Fees,Expenses,40000.2,Expense - Advisory Fee,Yes,Active
+40000.3,Expense - Performance Fees,Expenses,40000.3,Expense - Performance Fee,Yes,Active
+40000.4,Expense - Management Fee Rebate,Expenses,40000.4,Expense - Management Fee Rebate,Yes,Active
+40000.6,Expense - Acquisition Fee,Expenses,40000.6,Expense - Acquisition Fee,Yes,Active
+40000.7,Expense - Divestment Fee,Expenses,40000.7,Expense - Divestment Fee,Yes,Active
+40000.9,Expense - AIFM,Expenses,40000.9,Expense - AIFM,Yes,Active
+40001,Expense - Rent,Expenses,40001,Expense - Rent,Yes,Active
+40002,Expense - Lease,Expenses,40002,Expense - Lease,Yes,Active
+40003,Expense - Management Fee Waivers,Expenses,40003,Expense - Management Fee Waivers,Yes,Active
+40004,Expense - Management Fee Offsets,Expenses,40004,Expense - Management Fee Offsets,Yes,Active
+40005,"Expense (Related Persons) - Administration, Accounting, Valuation, Audit & Tax Prep/Advisory",Expenses,40005,"Expense (Related Persons) - Administration, Accounting, Valuation, Audit & Tax Prep/Advisory",Yes,Active
+40006,Expense (Related Persons) - IT Activities,Expenses,40006,Expense (Related Persons) - IT Activities,Yes,Active
+40007,Expense (Related Persons) - Legal and Regulatory,Expenses,40007,Expense (Related Persons) - Legal and Regulatory,Yes,Active
+40008,Expense (Related Persons) - Organization Costs,Expenses,40008,Expense (Related Persons) - Organization Costs,Yes,Active
+40009,Expense (Related Persons) - Other,Expenses,40009,Expense (Related Persons) - Other,Yes,Active
+40010,Expense (Related Persons) - Offsets to Expenses Paid to the Investment Adviser & Related Persons,Expenses,40010,Expense (Related Persons) - Offsets to Expenses Paid to the Investment Adviser & Related Persons,Yes,Active
+40011,Expense - Investigation & Examination,Expenses,40011,Expense - Investigation & Examination,Yes,Active
+40012,Expense - Partnership Expense Offset,Expenses,40012,Expense - Partnership Expense Offset,Yes,Active
+40013,Expenses - Non-recoverable Portfolio Costs / Unreimbursed Portfolio Company Expenses,Expenses,40013,Expenses - Non-recoverable Portfolio Costs / Unreimbursed Portfolio Company Expenses,Yes,Active
+40100,Expense - Audit Fees,Expenses,40100,Expense - Audit Fee,Yes,Active
+40200,Expense - Other Fees,Expenses,40200,Expense - Other Fees,Yes,Active
+40300,Expense - Administration costs,Expenses,40300,Expense - Administration fees,Yes,Active
+40400,Expense - Admin Corveldt,Expenses,40400,Expense - Admin Corveldt,Yes,Active
+41000,Expense - Abort Costs (Inv rel),Expenses,41000,Expense - Broken Deal,Yes,Active
+41050,Expense - Other,Expenses,41050,Expense - Other,Yes,Active
+41050,Expense - Other,Expenses,41050,Expense - Penalty and Filing Fees,Yes,Active
+41050.1,Expense - General,Expenses,41050.1,Expense - General,Yes,Active
+41050.2,Expense - Borne on behalf of,Expenses,41050.2,Expense - Borne on behalf of,Yes,Active
+41060,Expense - Comms & IT Expenses,Expenses,41060,Expense - Comms & IT Expenses,Yes,Active
+41061,Expense – Depreciation,Expenses,41061,Expense – Depreciation,Yes,Active
+41070,Expense - Agency Fees,Expenses,41070,Expense - Agency Fees,Yes,Active
+41071,Expense - Business Meeting Expenses,Expenses,41071,Expense - Business Meeting Expenses,Yes,Active
+41072,Expense - Trusteeship Expense - Annual Fees,Expenses,41072,Expense - Trusteeship Expense - Annual Fees,Yes,Active
+41080,Expense - Travel Expenses,Expenses,41080,Expense - Travel Expenses,Yes,Active
+41087,Expense - Foreign Conveyance Expenses,Expenses,41087,Expense - Foreign Conveyance Expenses,Yes,Active
+41090,Expense - Car Park Expenses,Expenses,41090,Expense - Car Park Expenses,Yes,Active
+41093,Expense - Donation,Expenses,41093,Expense - Donation,Yes,Active
+41094,Expense - Training,Expenses,41094,Expense - Learning and Training,Yes,Active
+41100,Expense - Entertainment,Expenses,41100,Expense - Entertainment & Transport,Yes,Active
+41100,Expense - Entertainment,Expenses,41100,Expense - Meal and Entertainment,Yes,Active
+41110,Expense - Legal Fees,Expenses,41110,Expense - Legal Fees,Yes,Active
+41120,Expense - Professional Fees,Expenses,41120,Expense - Professional Fees,Yes,Active
+41130,Expense - GST,Expenses,41130,Expense - GST,Yes,Active
+41150,Expense - Disbursements,Expenses,41150,Expense - Disbursements,Yes,Active
+41160,Expense - Brokerage,Expenses,41160,Expense - Brokerage,Yes,Active
+41170,Expense - Sourcing Fees,Expenses,41170,Expense - Sourcing Fees,Yes,Active
+41171,Expense- Contract for service fees,Expenses,41171,Expense- Contract for service fees,Yes,Active
+41180,Expense - Marketing,Expenses,41180,Expense - Marketing,Yes,Active
+41191,Expense - Tax Advisory,Expenses,41191,Expense - Tax Advisory,Yes,Active
+41191,Expense - Tax Advisory,Expenses,41191,Expense - Tax Compliance,Yes,Active
+42000,Expense - Transaction Cost,Expenses,42000,Expense - Due Dilligence (Inv Rel),Yes,Active
+42000,Expense - Transaction Cost,Expenses,42000,Expense - Transaction Cost,Yes,Active
+42000.1,Expense - Investment,Expenses,42000.1,Expense - Investment,Yes,Active
+42000.2,Expense - Property,Expenses,42000.2,Expense - Property Expenses,Yes,Active
+42000.3,Expense - Property Management Fees,Expenses,42000.3,Expense - Property Management Fees,Yes,Active
+42000.5,Expense - Legal and Professional fees,Expenses,42000.5,Expense - Legal and Professional,Yes,Active
+42050,Expense - Insurance,Expenses,42050,Expense - Insurance,Yes,Active
+42050,Expense - Insurance,Expenses,42050,Expense - Insurance (Non Inv Rel),Yes,Active
+43000.1,Bank Charges,Expenses,43000.1,Expense - Bank Charges,Yes,Active
+44000,Expense - Funding Interest (Non Inv Rel),Expenses,44000,Expense - Funding Interest (Non Inv Rel),Yes,Active
+44000.1,Expense - Loan Interest,Expenses,44000.1,Expense - Loan Interest,Yes,Active
+44000.11,Expense - Interest on late Commitment,Expenses,44000.11,Expense - Interest on late Commitment,Yes,Active
+44000.12,Expense - Margin Interest Expense,Expenses,44000.12,Expense - Margin Interest Expense,Yes,Active
+44000.2,Expense - Loan Commitment Fee,Expenses,44000.2,Expense - Loan Commitment Fees,Yes,Active
+44000.3,Expense - Loan Facility fee,Expenses,44000.3,Expense - Loan Facility Fees,Yes,Active
+44000.4,Expense - Interest,Expenses,44000.4,Expense - Interest,Yes,Active
+44000.5,Expense - NUF,Expenses,44000.5,Expense - Non Utilisation Fee,Yes,Active
+44000.6,Expense - Swap Interest,Expenses,44000.6,Expense - Swap Interest,Yes,Active
+44000.7,Expense - Break Costs,Expenses,44000.7,Expense - Loan / Swap Break Costs,Yes,Active
+44000.9,Expense - Premium derivatives,Expenses,44000.9,Expense - Premium derivatives,Yes,Active
+45000.1,Expense - Regulatory,Expenses,45000.1,Expense - Regulatory,Yes,Active
+45000.1,Expense - Listing Fees,Expenses,45000.1,Expense - Listing Fees,Yes,Active
+45000.2,Expense - Organisational,Expenses,45000.2,Expense - Organisational,Yes,Active
+45000.4,Expense - Custody Fees,Expenses,45000.4,Expense - Custody Fees,Yes,Active
+45000.5,Expense - Directors Fees,Expenses,45000.5,Expense - Directors Fees,Yes,Active
+45000.6,Expense - Service Charge,Expenses,45000.6,Expense - Service Charge,Yes,Active
+45000.8,Expense - Consultancy Fees,Expenses,45000.8,Expense - Consultancy Fees,Yes,Active
+45000.9,Expense - Valuation Fees,Expenses,45000.9,Expense - Valuation Fees,Yes,Active
+45100,Expense - Employee Remuneration & Benefits,Expenses,45100,Expense - Employee Remuneration & Benefits,Yes,Active
+46000,Expense - Fund,Expenses,46000,Expense - Fund,Yes,Active
+46000.1,Expense - Partnership,Expenses,46000.1,Expense - Partnership,Yes,Active
+47000,Expense - Bank Interest,Expenses,47000,Expense - Bank Interest,Yes,Active
+48000,Expense - Dividend Paid,Expenses,48000,Expense - Dividend Paid,Yes,Active
+49000,Expense - Provisions,Expenses,49000,Provision - Account Receivable (P/L) (Inv Rel),Yes,Active
+49000,Expense - Provisions,Expenses,49000,Provision - Account Receivable (P/L) (Non Inv Rel),Yes,Active
+49000,Expense - Provisions,Expenses,49000,Provision - Escrow (P/L),Yes,Active
+49050,GP - Carry Profit Reallocation (Unrealized),Expenses,49050,GP Profit Reallocation - Carried Interest (P/L) (Unrealized) (Non Inv Rel),Yes,Active
+49055,GP - Carry Profit Reallocation (Realized),Expenses,49055,GP Profit Reallocation - Carried Interest (P/L) (Realized)  (Non Inv Rel),Yes,Active
+49055.1,Expense - Incentive Fee,Expenses,49055.1,Expense - Incentive Fee,Yes,Active
+49998,Expense – Withholding Tax,Expenses,49998,Expense – Withholding Tax,Yes,Active
+49999,Expense - Tax,Expenses,49999,Expense - Deferred Income Tax Provision (Recovery),Yes,Active
+49999,Expense - Tax,Expenses,49999,Expense - Federal Tax,Yes,Active
+49999,Expense - Tax,Expenses,49999,Expense - Foreign Tax,Yes,Active
+49999,Expense - Tax,Expenses,49999,Expense - Non Recoverable HST,Yes,Active
+49999,Expense - Tax,Expenses,49999,Expense - State/Provincial,Yes,Active
+49999,Expense - Tax,Expenses,49999,Expense - Tax Expense,Yes,Active
+49999.1,Expense - VAT,Expenses,49999.1,Expense - VAT,Yes,Active
+52000,E - Unrealised FMV Gains / Losses,Revenues,52000,Gain/Loss - Market - Equity - Unrealized Gain/Loss (P/L),Yes,Active
+52000.1,Unrealized Gain/Loss,Revenues,52000.1,Unrealized Gain/Loss,Yes,Active
+52000.1,Unrealized Gain/Loss,Revenues,52000.1,Unrealized Gain/Loss - Carried Interest,Yes,Active
+52010.1,Dividend Income,Revenues,52010.1,Income - Dividend,Yes,Active
+53000,E - Unrealized FX Gains / Losses,Revenues,53000,Gain/Loss - FX - Equity - Unrealized Gain/Loss (P/L),Yes,Active
+53000.1,Unrealized FX Gain/Loss,Revenues,53000.1,Suspense - for PT,Yes,Active
+53000.1,Unrealized FX Gain/Loss,Revenues,53000.1,Unrealized FX Gain/Loss,Yes,Active
+53000.11,Unrealized Gain/loss - FX Swap,Revenues,53000.11,Unrealized Gain/loss - FX Swap,Yes,Active
+53000.2,Unrealized Gain/Loss - FX Options,Revenues,53000.2,Unrealized Gain/Loss - FX Options,Yes,Active
+53000.3,Unrealized Gain/Loss - FX Forward Contracts,Revenues,53000.3,Unrealized Gain/Loss - FX Forward Contracts,Yes,Active
+53000.4,Unrealized Gain/Loss- Derivatives,Revenues,53000.4,Unrealized Gain/Loss - Derivatives,Yes,Active
+53000.6,Unrealised FX Gain/Loss - Senior loan,Revenues,53000.6,Unrealised FX Gain/Loss - Senior loan,Yes,Active
+53000.7,Unrealised FX Gain/Loss - Senior Notes,Revenues,53000.7,Unrealised FX Gain/Loss - Senior Notes,Yes,Active
+54000,Unrealized Gain/Loss - Interest Rate Swap,Revenues,54000,Unrealized Gain/loss - Interest Rate Swap,Yes,Active
+54010,Unrealized – Deferred Tax,Revenues,54010,Unrealized – Deferred Tax,Yes,Active
+55000,Realized Gain/Loss - Divestment,Revenues,55000,Realized Gain/Loss - Broken Deal,Yes,Active
+55000,Realized Gain/Loss - Divestment,Revenues,55000,Realized Gain/Loss - Divestment,Yes,Active
+55020,Realized Gain - Deferred Tax - Divestment,Revenues,55020,Realized Gain - Deferred Tax - Divestment,Yes,Active
+55030,Realized Gain - Income Tax - Divestment,Revenues,55030,Realized Gain - Income Tax - Divestment,Yes,Active
+55050,Realized Gain/Loss on IRS,Revenues,55050,Realized Gain/Loss on IRS,Yes,Active
+55100,Realized Gain/Loss on FX Options,Revenues,55100,Realized Gain/Loss on FX Options,Yes,Active
+55200,Realized FX Gain/Loss,Revenues,55200,Realized FX Gain/Loss,Yes,Active
+55200.1,Realized FX Gain/Loss - Senior Notes,Revenues,55200.1,Realized FX Gain/Loss - Senior Notes,Yes,Active
+55200.2,Realized FX Gain/Loss - Derivatives,Revenues,55200.2,Realized FX Gain/Loss - Derivatives,Yes,Active
+55300,Realized Gain/Loss – FX Forward Contracts,Revenues,55300,Realized Gain/Loss – FX Forward Contracts,Yes,Active
+55400,Realized Gain/Loss - FX Swap,Revenues,55400,Realized Gain/Loss - FX Swap,Yes,Active
+62000,L - Unrealized FMV Gains/Losses,Revenues,62000,Gain/Loss - Market - Loan - Unrealized Gain/loss (P/L),Yes,Active
+63000,L - Unrealized FX Gains / Losses,Revenues,63000,Gain/Loss - FX - Loan - Unrealized Gain/Loss (P/L),Yes,Active
+64010,L - Interest Income,Revenues,64010,Income - Interest (Inv Rel)(P/L),Yes,Active
+64020,L - Amortization Income,Revenues,64020,Income - Loans - Discount Amortization (Investments) (P/L),Yes,Active
+64020.1,Interest Income,Revenues,64020.1,Income - Interest,Yes,Active
+64020.2,Interest Income -Junior Loan,Revenues,64020.2,Interest Income - Junior Loan,Yes,Active
+64020.3,Interest Income - Senior Loan,Revenues,64020.3,Interest Income - Senior Loan,Yes,Active
+64040,Income - Bond Interest,Revenues,64040,Income - Bond Interest,Yes,Active
+64050,Income - Loan Interest,Revenues,64050,Income - Loan Interest,Yes,Active
+65000,Income - Bank Interest Income (Non Inv Rel),Revenues,65000,Income - Bank Interest,Yes,Active
+65500,FX Result other BS Items (Non Inv Rel),Revenues,65500,Gain/Loss - FX - Other BS Items - Realized Gain/Loss (P/L),Yes,Active
+65500,FX Result other BS Items (Non Inv Rel),Revenues,65500,Gain/Loss - FX - Other BS Items - Unrealized Gain/Loss (P/L),Yes,Active
+66000,Income - Investment fees,Revenues,66000,Income - Investment Fees,Yes,Active
+66000.1,Income - Rental,Revenues,66000.1,Income - Rent,Yes,Active
+66000.2,Income - Lease,Expenses,66000.2,Income - Lease,Yes,Active
+66000.4,Income - Investment fees - Senior loan,Revenues,66000.4,Income - Investment fees - Senior loan,Yes,Active
+66000.5,Income - Investment fees - Junior loan,Revenues,66000.5,Income - Investment fees - Junior loan,Yes,Active
+66000.6,Income - Swap Interest,Revenues,66000.6,Income - Swap Interest,Yes,Active
+67000.1,Income - Management Fee,Revenues,67000.1,Income - Management Fee,Yes,Active
+67100,Income - Advisory Fees,Revenues,67100,Income - Advisory Fees,Yes,Active
+67200,Income - Performance Fee,Revenues,67200,Income - Performance Fee,Yes,Active
+67200,Income - Performance Fee,Revenues,67200,Realized Gain/Loss - Carried Interest,Yes,Active
+67500.1,Income - Director Fees,Revenues,67500.1,Income - Directors Fees,Yes,Active
+68000,Income - Other (Inv Rel),Revenues,68000,Income - Other (Inv Rel),Yes,Active
+69000.1,Income - Other,Revenues,69000.1,Income - Other,Yes,Active
+69100,Income - Expenses paid by,Revenues,69100,Income - Expenses paid by,Yes,Active
+69999,Income - Tax,Revenues,69999,Income - Tax Deferred Income,Yes,Active
+69999,Income - Tax,Revenues,69999,Income - Tax income,Yes,Active

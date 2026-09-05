@@ -45,7 +45,53 @@ FUNCTION_DECLARATIONS = [
             "properties": {
                 "proposal": {
                     "type": "OBJECT",
-                    "description": "Object with currency, classification and lines",
+                    "description": "Object with currency, classification and two journal lines",
+                    "properties": {
+                        "currency": {
+                            "type": "STRING",
+                            "description": "ISO currency code from the source transaction",
+                        },
+                        "classification": {
+                            "type": "STRING",
+                            "description": "Allowed classification such as Vendor or Related Party",
+                        },
+                        "lines": {
+                            "type": "ARRAY",
+                            "description": "Exactly two journal-line objects",
+                            "items": {
+                                "type": "OBJECT",
+                                "properties": {
+                                    "account": {
+                                        "type": "STRING",
+                                        "description": "Account code from the chart of accounts",
+                                    },
+                                    "transaction_type": {
+                                        "type": "STRING",
+                                        "description": "Journal transaction type",
+                                    },
+                                    "debit": {
+                                        "type": "NUMBER",
+                                        "description": "Debit amount",
+                                    },
+                                    "credit": {
+                                        "type": "NUMBER",
+                                        "description": "Credit amount",
+                                    },
+                                    "memo": {
+                                        "type": "STRING",
+                                        "description": "Short line memo",
+                                    },
+                                },
+                                "required": [
+                                    "account",
+                                    "transaction_type",
+                                    "debit",
+                                    "credit",
+                                ],
+                            },
+                        },
+                    },
+                    "required": ["currency", "classification", "lines"],
                 }
             },
             "required": ["proposal"],

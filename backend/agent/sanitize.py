@@ -60,6 +60,70 @@ def looks_like_account_or_narrative(value: str) -> bool:
     )
 
 
+_ENV_KEY = "".join(("GEMINI_API_", "KEY"))
+API_KEY = re.compile(r"AIza[0-9A-Za-z_-]{20,}|sk-[A-Za-z0-9]{20,}|" + _ENV_KEY + r"=\S+")
+HTTP_STATUS = re.compile(r"\b([1-5]\d{2})\b")
+API_STATUS = re.compile(
+    r"\b(INVALID_ARGUMENT|FAILED_PRECONDITION|PERMISSION_DENIED|UNAUTHENTICATED|"
+    r"NOT_FOUND|RESOURCE_EXHAUSTED|INTERNAL|UNAVAILABLE|DEADLINE_EXCEEDED)\b"
+)
+
+
+def sanitize_provider_message(message: str) -> str:
+    """Keep a short diagnostic fragment with keys, accounts and narratives removed."""
+    text = " ".join((message or "").split())
+    text = API_KEY.sub("[redacted-key]", text)
+    text = ACCOUNT_NUMBER.sub("[redacted-account]", text)
+    text = DIGIT_RUN.sub("#", text)
+    text = AMOUNT_TOKEN.sub("#", text)
+    if looks_like_full_narrative(text) or len(text) > 120:
+        text = text[:40].rstrip() + "…"
+    return text or "-"
+
+
+def format_provider_error(exc: BaseException) -> tuple[str, str]:
+    """Return (safe log line, UI reason with status/code only)."""
+    name = type(exc).__name__
+    raw_code = getattr(exc, "code", None)
+    raw_status = getattr(exc, "status", None)
+    http_status = ""
+    api_status = ""
+    if isinstance(raw_code, int) or (isinstance(raw_code, str) and str(raw_code).isdigit()):
+        http_status = str(raw_code)
+        if raw_status:
+            api_status = str(raw_status)
+    else:
+        if raw_status is not None and (isinstance(raw_status, int) or str(raw_status).isdigit()):
+            http_status = str(raw_status)
+        if raw_code:
+            api_status = str(raw_code)
+        elif raw_status and not http_status:
+            api_status = str(raw_status)
+    message = getattr(exc, "message", None)
+    if not isinstance(message, str) or not message:
+        first = exc.args[0] if exc.args else ""
+        message = first if isinstance(first, str) else ""
+    if not http_status:
+        match = HTTP_STATUS.search(message)
+        if match:
+            http_status = match.group(1)
+    if not api_status:
+        match = API_STATUS.search(message)
+        if match:
+            api_status = match.group(1)
+    safe_message = sanitize_provider_message(message)
+    log_line = (
+        f"Gemini {name} status={http_status or '-'} code={api_status or '-'} "
+        f"message={safe_message}"
+    )
+    ui_reason = f"Gemini unavailable: {name}"
+    if http_status:
+        ui_reason += f" status={http_status}"
+    if api_status:
+        ui_reason += f" code={api_status}"
+    return log_line, ui_reason
+
+
 def redact_for_log(value: str) -> str:
     """Safe log fragment: no digit runs and no long narrative."""
     text = " ".join((value or "").split())

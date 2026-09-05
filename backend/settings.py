@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:3000"
     agent_enabled: bool = False
     gemini_api_key: str = ""
-    gemini_model: str = "gemini-2.5-flash"
+    gemini_model: str = "gemini-3.6-flash"
     agent_timeout_seconds: float = 30.0
     agent_max_tool_rounds: int = 4
 

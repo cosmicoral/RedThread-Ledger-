@@ -1,4 +1,5 @@
 import re
+import subprocess
 from pathlib import Path
 
 from settings import settings
@@ -41,6 +42,7 @@ def test_env_example_has_empty_key_placeholder() -> None:
     assert "AGENT_ENABLED=false" in text
     assert "GEMINI_API_KEY=\n" in text or text.strip().endswith("GEMINI_API_KEY=")
     assert not re.search(r"GEMINI_API_KEY=.+", text)
+    assert "GEMINI_MODEL=gemini-3.6-flash" in text
 
 
 def test_tracked_sources_have_no_secret_like_values() -> None:
@@ -56,9 +58,11 @@ def test_tracked_sources_have_no_secret_like_values() -> None:
 
 
 def test_dotenv_is_not_a_tracked_secret_file() -> None:
-    env = ROOT / ".env"
-    if env.exists():
-        text = env.read_text()
-        assigned = re.search(r"GEMINI_API_KEY=(\S+)", text)
-        if assigned:
-            assert assigned.group(1) in {"", "your-key-here", "changeme"}
+    gitignore = (ROOT / ".gitignore").read_text()
+    assert ".env" in gitignore.splitlines() or gitignore.startswith(".env")
+    tracked = subprocess.check_output(
+        ["git", "ls-files", "--", ".env"],
+        cwd=ROOT,
+        text=True,
+    )
+    assert tracked.strip() == ""

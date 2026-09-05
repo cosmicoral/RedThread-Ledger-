@@ -25,6 +25,8 @@ spec:
               value: "true"
             - name: CORS_ORIGINS
               value: "*"
+            - name: PORT
+              value: "8080"
             - name: STATIC_DIR
               value: /app/frontend/dist
             - name: HACKATHON_STATEMENTS_DIR

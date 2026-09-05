@@ -1,0 +1,28 @@
+.git
+.gcloud
+.venv
+venv
+**/__pycache__
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/.coverage
+**/.vite
+node_modules
+frontend/node_modules
+frontend/dist
+.env
+.env.*
+!.env.example
+
+# Evaluation answer sheets — never bake into the runtime image
+data/raw
+**/*.xlsx
+**/*.xls
+
+# Local-only / bulky artefacts
+docs/screenshots
+*.log
+.DS_Store
+.idea
+.vscode

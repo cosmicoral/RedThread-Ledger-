@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { apiUrl } from "../api";
 import type { ExceptionReason, QueueResponse, TransactionResult } from "../types";
 import { PdfEvidence } from "./PdfEvidence";
 
@@ -63,7 +64,7 @@ export function ReviewQueue() {
   const load = () => {
     setError(null);
     setQueue(null);
-    fetch("/queue")
+    fetch(apiUrl("/queue"))
       .then(async (response) => {
         if (!response.ok) {
           throw new Error(`Queue failed (${response.status})`);

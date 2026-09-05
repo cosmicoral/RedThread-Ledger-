@@ -1,8 +1,7 @@
 from contextlib import asynccontextmanager
-
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -40,9 +39,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+api = APIRouter()
 
-@app.get("/health")
-def health() -> dict:
+
+def _health() -> dict:
     return {
         "status": "ok",
         "demo_mode": settings.demo_mode,
@@ -50,7 +50,18 @@ def health() -> dict:
     }
 
 
-@app.post("/process")
+@app.get("/health")
+def root_health() -> dict:
+    """Cloud Run and local probes. Same payload as /api/health."""
+    return _health()
+
+
+@api.get("/health")
+def api_health() -> dict:
+    return _health()
+
+
+@api.post("/process")
 def run_process() -> dict:
     results = process_all()
     return {"count": len(results)}
@@ -72,7 +83,7 @@ def _counts(items: list[TransactionResult]) -> dict[str, int]:
     return counts
 
 
-@app.get("/queue")
+@api.get("/queue")
 def get_queue() -> dict:
     grouped = current_queue()
     items = current_results()
@@ -84,7 +95,7 @@ def get_queue() -> dict:
     }
 
 
-@app.get("/transactions/{transaction_id:path}")
+@api.get("/transactions/{transaction_id:path}")
 def read_transaction(transaction_id: str) -> TransactionResult:
     item = get_transaction(transaction_id)
     if item is None:
@@ -92,12 +103,15 @@ def read_transaction(transaction_id: str) -> TransactionResult:
     return item
 
 
-@app.get("/statements/{name}")
+@api.get("/statements/{name}")
 def read_statement(name: str) -> FileResponse:
     path = statement_path(name)
     if path is None:
         raise HTTPException(status_code=404, detail="Statement not found")
     return FileResponse(path, media_type="application/pdf", filename=path.name)
+
+
+app.include_router(api, prefix="/api")
 
 
 _static = Path(settings.static_dir) if settings.static_dir else Path("frontend/dist")

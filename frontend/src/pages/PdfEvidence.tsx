@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import { apiUrl } from "../api";
 
 GlobalWorkerOptions.workerSrc = workerUrl;
 
@@ -26,7 +27,7 @@ export function PdfEvidence({ documentName, page }: Props) {
     setState("loading");
 
     const render = async () => {
-      const pdf = await getDocument(`/statements/${encodeURIComponent(documentName)}`).promise;
+      const pdf = await getDocument(apiUrl(`/statements/${encodeURIComponent(documentName)}`)).promise;
       if (cancelled) {
         return;
       }
@@ -67,7 +68,7 @@ export function PdfEvidence({ documentName, page }: Props) {
       {state === "error" ? (
         <p className="empty">
           Could not render the PDF page.{" "}
-          <a href={`/statements/${encodeURIComponent(documentName)}`} target="_blank" rel="noreferrer">
+          <a href={apiUrl(`/statements/${encodeURIComponent(documentName)}`)} target="_blank" rel="noreferrer">
             Open the source document
           </a>
         </p>
@@ -76,7 +77,7 @@ export function PdfEvidence({ documentName, page }: Props) {
       {state !== "ready" ? (
         <iframe
           title="Source statement"
-          src={`/statements/${encodeURIComponent(documentName)}#page=${page ?? 1}`}
+          src={`${apiUrl(`/statements/${encodeURIComponent(documentName)}`)}#page=${page ?? 1}`}
         />
       ) : null}
     </div>

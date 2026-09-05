@@ -136,7 +136,22 @@ make lint
 
 ## Cloud Run
 
-A single-service image is prepared in the root `Dockerfile` and [deploy/README.md](deploy/README.md). It is **not deployed** from this repository by default and must not be given an API key.
+One public service serves the UI and `/api`. Health: `GET /health`.
+
+Prepared, not deployed: root `Dockerfile`, `.dockerignore`, and [deploy/README.md](deploy/README.md). Do not pass an API key.
+
+```bash
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
+
+gcloud run deploy redthread-ledger \
+  --source . \
+  --region YOUR_HACKATHON_REGION \
+  --allow-unauthenticated \
+  --port 8080 \
+  --memory 1Gi \
+  --timeout 300 \
+  --set-env-vars DEMO_MODE=true,CORS_ORIGINS=*
+```
 
 ## Hackathon submission
 

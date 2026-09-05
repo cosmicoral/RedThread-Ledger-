@@ -1,0 +1,28 @@
+# Cloud Run --source upload list.
+# Keep the 19 runtime files under data/hackathon/ (7 PDFs + 12 CSVs).
+# Never upload secrets or evaluation answer sheets.
+
+.gcloudignore
+.git
+.gitignore
+#!include:.gitignore
+
+.env
+.env.*
+!.env.example
+
+# Evaluation workbook / answer sheets
+data/raw/
+**/*.xlsx
+**/*.xls
+**/*staging*
+**/*Staging*
+**/*DIU*
+
+# Local-only / bulky artefacts (also in .dockerignore)
+.venv/
+venv/
+node_modules/
+frontend/node_modules/
+frontend/dist/
+docs/screenshots/

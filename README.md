@@ -251,7 +251,14 @@ make lint       # Run code-quality checks
 
 ```text
 redthread-ledger/
-├── frontend/                 # Review interface
+├── README.md
+├── docs/
+│   └── problem-evidence.md
+├── data/
+│   ├── hackathon/
+│   │   ├── bank-statements/
+│   │   └── reference-data/
+│   └── demo/                 # Approved anonymised demo fixtures
 ├── backend/
 │   ├── extraction/           # PDF and transaction extraction
 │   ├── matching/             # Entity, counterparty and project matching
@@ -259,21 +266,16 @@ redthread-ledger/
 │   ├── journal/              # Double-entry generation
 │   ├── validation/           # Accounting and evidence checks
 │   └── api/                  # Application API
+├── frontend/                 # Review interface
 ├── tests/
 │   ├── fixtures/
 │   ├── unit/
 │   └── integration/
 ├── evaluation/               # Dataset evaluation harness
-├── data/
-│   └── demo/                 # Approved anonymised demo fixtures
-├── docs/
-│   ├── problem-evidence.md
-│   ├── architecture.md
-│   └── evaluation.md
 ├── .env.example
-├── docker-compose.yml
+├── .gitignore
 ├── Makefile
-└── README.md
+└── docker-compose.yml
 ```
 
 ## Scope

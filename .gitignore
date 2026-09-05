@@ -1,0 +1,47 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+
+# Hackathon source data — keep out of git unless organisers approve redistribution
+data/raw/*
+!data/raw/README.md
+data/hackathon/bank-statements/*
+!data/hackathon/bank-statements/.gitkeep
+!data/hackathon/bank-statements/README.md
+data/hackathon/reference-data/*
+!data/hackathon/reference-data/.gitkeep
+!data/hackathon/reference-data/README.md
+
+# Local artefacts
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.xlsx
+*.xls
+!tests/fixtures/**/*.xlsx
+
+# Docker
+.docker/

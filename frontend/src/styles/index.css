@@ -1,0 +1,174 @@
+:root {
+  color-scheme: light;
+  --ink: #1b1a17;
+  --muted: #5c584f;
+  --paper: #f6f1e8;
+  --panel: #fffdf8;
+  --line: #d8d0c2;
+  --accent: #8b1e2d;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.app {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 36px 24px 80px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+.app-header h1,
+.panel h2 {
+  margin: 0 0 8px;
+}
+
+.eyebrow {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+.lede,
+.panel p,
+.empty {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.panel {
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.steps,
+.queue {
+  padding-left: 20px;
+}
+
+.queue {
+  list-style: none;
+  padding: 0;
+}
+
+.queue li {
+  border-bottom: 1px solid var(--line);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+
+.filters button,
+.row {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.filters button {
+  padding: 6px 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.filters button.active,
+.row.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 8px;
+  text-align: left;
+}
+
+.row em {
+  display: block;
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.facts {
+  display: grid;
+  gap: 12px;
+}
+
+.facts dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.facts dd {
+  margin: 4px 0 0;
+}
+
+.matches {
+  padding-left: 18px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  padding: 6px 8px 6px 0;
+}
+
+.pdf-frame {
+  overflow: auto;
+  border: 1px solid var(--line);
+  background: white;
+}
+
+.pdf-caption {
+  margin: 8px 12px;
+  color: var(--muted);
+}
+
+.empty code {
+  font-size: 0.9em;
+}

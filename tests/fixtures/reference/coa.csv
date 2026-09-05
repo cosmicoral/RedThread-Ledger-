@@ -1,0 +1,15 @@
+Account,Account Short Description,Account Type,GL Account Code,Trans Type,Is Active,Account Active or Inactive
+10000,Cash - On Hand,Assets,10000,Cash - Disbursed,Yes,Active
+10000,Cash - On Hand,Assets,10000,Cash - Received,Yes,Active
+11000,L - Investments,Assets,11000,Investments - Loan - Purchase,Yes,Active
+12000,E - Investments,Assets,12000,Investments - Equity - Purchase,Yes,Active
+16100.2,Receivable - Related Party,Assets,16100.2,Receivable - Related Party,Yes,Active
+20500.1,Payable - Related Party,Liabilities,20500.1,Payable - Related Party,Yes,Active
+20500.4,Accounts Payable,Liabilities,20500.4,Accounts Payable,Yes,Active
+20500.5,Payable - Third Party,Liabilities,20500.5,Payable - Third Party,Yes,Active
+39980,Currency Correcting,Equity,39980,Currency Correcting Debit,Yes,Active
+39980,Currency Correcting,Equity,39980,Currency Correcting Credit,Yes,Active
+39990,Suspense Account,Equity,39990,Suspense (debit),Yes,Active
+39990,Suspense Account,Equity,39990,Suspense (credit),Yes,Active
+43000.1,Bank Charges,Expenses,43000.1,Expense - Bank Charges,Yes,Active
+65000,Income - Bank Interest,Income,65000,Income - Bank Interest,Yes,Active

@@ -1,0 +1,5 @@
+Statement details
+Bank reference Customer reference TRN type Value date Credit amount Debit amount Balance Time Post date
+NONREF NONREF TFR+ INT 24 Mar 2026 50.54 113,917.73 07:05 24 Mar 2026
+Narrative CREDIT INTEREST
+01 Apr 2026 | Account number 240-149813-030 Page 2 of 2

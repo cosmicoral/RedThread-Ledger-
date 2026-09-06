@@ -8,9 +8,10 @@ GlobalWorkerOptions.workerSrc = workerUrl;
 type Props = {
   documentName: string;
   page: number | null;
+  spotlighted?: boolean;
 };
 
-export function PdfEvidence({ documentName, page }: Props) {
+export function PdfEvidence({ documentName, page, spotlighted = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
 
@@ -60,10 +61,12 @@ export function PdfEvidence({ documentName, page }: Props) {
   }
 
   return (
-    <div className="pdf-frame">
+    <div className={`pdf-frame${spotlighted ? " spotlighted" : ""}`}>
       <p className="pdf-caption">
-        Source citation: {documentName} · page {page ?? "?"}
+        <span><b>Evidence source</b>{documentName}</span>
+        <strong>cited page {page ?? "?"}</strong>
       </p>
+      <p className={`pdf-status ${state}`}>{state === "ready" ? "Source available" : state === "loading" ? "Verifying source…" : "Source requires manual open"}</p>
       {state === "loading" ? <p className="empty">Loading PDF page…</p> : null}
       {state === "error" ? (
         <p className="empty">

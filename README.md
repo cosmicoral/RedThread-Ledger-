@@ -8,6 +8,10 @@ Built for the **Ylookup × Encode Rebuild Private Markets AI Hackathon — Produ
 
 > **Status:** Deterministic hackathon MVP. Human approval is required before any journal is posted.
 
+![Review Queue with Issue Map and a Needs-review journal](docs/screenshots/review-queue.png)
+
+The review workspace is three panes: the queue, the proposed journal, and an Issue Map / Evidence trace. Current official-pack result: **100 extracted · 68 ready · 32 needs review**.
+
 ## The problem
 
 Fund managers rely on administrators to prepare NAVs, financial statements and investor reporting, but the review process is often slow and repetitive.
@@ -40,17 +44,17 @@ Two balanced journal lines
 Deterministic validation
         │
         ▼
-Review UI (Ready to post / Needs review)
+Review workspace (queue · journal · Issue Map / Evidence)
 ```
 
-The MVP is deterministic. No model API key is required. Matches are limited to supplied master data. Unsupported or ambiguous rows stay **Needs review**.
+The MVP is deterministic. No model API key is required. Matches are limited to supplied master data. Unsupported or ambiguous rows stay **Needs review**. Implausible bank-charge amounts are held for review rather than posted as fees.
 
-An optional Gemini exception agent can investigate a Needs-review row when a person clicks **Run agent review**. It never posts, never approves, and never changes the original deterministic result. `AGENT_ENABLED` defaults to false.
+An optional Gemini 3.6 exception agent can investigate a Needs-review row when a person clicks **Investigate with AI**. It never posts, never approves, and never changes the original deterministic result. `AGENT_ENABLED` defaults to false.
 
 ```text
 redthread-ledger/
 ├── backend/            # extraction, matching, classification, journal, validation, API
-├── frontend/           # review queue
+├── frontend/           # review workspace: queue, journal, Issue Map, Evidence
 ├── data/hackathon/     # runtime inputs committed in-repo
 │   ├── bank-statements/
 │   └── reference-data/
@@ -123,18 +127,18 @@ make lint
 
 ## Screenshots
 
-![Review queue with 100 / 85 / 15 summary](docs/screenshots/queue-ready.png)
+![Needs-review row with classification issue, suspense journal, and Issue Map](docs/screenshots/needs-review.png)
 
-![Needs-review transaction with evidence and journal lines](docs/screenshots/needs-review.png)
+![Ready bank-charge journal with balanced debit and credit](docs/screenshots/queue-ready.png)
 
 ## Two-minute demo flow
 
 1. Run `make demo` and open http://localhost:3000.
-2. Read the banner: **human approval required**.
-3. Confirm the summary: **100 extracted / 85 ready / 15 needs review**.
-4. Open a **Ready to post** bank-fee or Cephalus row. Check the source citation (`document · p.N`), chosen master-data row, and two balanced journal lines.
-5. Filter **Needs review**. Open a classification-review row. Confirm it was not given a invented counterparty, and that the PDF page still cites the source.
-6. Optional: click **Run agent review** if `AGENT_ENABLED=true`. The original deterministic result must stay unchanged.
+2. Confirm the three-pane workspace and the note: **human confirmation required before posting**.
+3. Confirm the summary: **100 extracted / 68 ready / 32 needs review**.
+4. Filter **Ready**. Open a bank-fee row. Check the two balanced journal lines (for example Expense - Bank Charges and Cash - Disbursed).
+5. Filter **Review**. Open a classification / suspense row. Confirm it was not given an invented counterparty. Use **Trace evidence** or the Evidence tab to see the source citation.
+6. Optional: click **Investigate with AI** if `AGENT_ENABLED=true` and a Gemini key is set. The original deterministic result must stay unchanged.
 7. Say aloud: RedThread proposes; a person approves.
 
 ## Cloud Run

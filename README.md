@@ -2,7 +2,7 @@
 
 **Live app:** [https://redthread-ledger-119657658536.europe-west1.run.app/](https://redthread-ledger-119657658536.europe-west1.run.app/)
 
-**Demo video:** [https://www.youtube.com/watch?v=naY3fFEiUBM](https://www.youtube.com/watch?v=naY3fFEiUBM)
+**Demo video:** [https://www.youtube.com/watch?v=naY3fFEiUBM](https://www.youtube.com/watch?v=naY3fFEiUBM) — play at 720p
 
 **Evidence-linked bank statement processing for private-market fund operations.**
 
@@ -172,7 +172,7 @@ gcloud run deploy redthread-ledger \
 - **Problem source:** Anonymised fund-manager NAV workflow interview
 - **Dataset:** Bank Statements to Journal Entries (runtime PDFs + allowlisted sheets only)
 - **Run locally:** `make demo`
-- **Demo video:** [https://www.youtube.com/watch?v=naY3fFEiUBM](https://www.youtube.com/watch?v=naY3fFEiUBM)
+- **Demo video:** [https://www.youtube.com/watch?v=naY3fFEiUBM](https://www.youtube.com/watch?v=naY3fFEiUBM) — play at 720p
 - **Live application:** [https://redthread-ledger-119657658536.europe-west1.run.app/](https://redthread-ledger-119657658536.europe-west1.run.app/)
 
 ## Acknowledgements

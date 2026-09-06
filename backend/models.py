@@ -48,6 +48,16 @@ class JournalLine(BaseModel):
     allocation_rule: str = ""
 
 
+class SourceSnapshot(BaseModel):
+    document_name: str = ""
+    page: int | None = None
+    raw_description: str = ""
+    reference: str | None = None
+    account_number: str | None = None
+    amount: float | None = None
+    currency: str | None = None
+
+
 class TransactionResult(BaseModel):
     transaction_id: str
     date: str | None = None
@@ -75,3 +85,10 @@ class TransactionResult(BaseModel):
     candidates: list[MatchCandidate] = Field(default_factory=list)
     journal_lines: list[JournalLine] = Field(default_factory=list)
     notes: str = ""
+    issue_type: str = "other"
+    issue_subtype: str | None = None
+    attention_level: str = "low"
+    cash_direction: str = "unknown"
+    suspense_flag: bool = False
+    match_reasons: list[str] = Field(default_factory=list)
+    source_snapshot: SourceSnapshot | None = None

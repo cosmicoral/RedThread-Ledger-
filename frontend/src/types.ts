@@ -60,6 +60,21 @@ export type TransactionResult = {
   candidates: MatchCandidate[];
   journal_lines: JournalLine[];
   notes: string;
+  issue_type?: "classification" | "counterparty" | "project" | "amount" | "other";
+  issue_subtype?: "close_candidates" | "low_confidence" | "suspense" | "missing_evidence" | "unresolved" | null;
+  attention_level?: "low" | "medium" | "high";
+  cash_direction?: "inflow" | "outflow" | "unknown";
+  suspense_flag?: boolean;
+  match_reasons?: string[];
+  source_snapshot?: {
+    document_name: string;
+    page: number | null;
+    raw_description: string;
+    reference: string | null;
+    account_number: string | null;
+    amount: number | null;
+    currency: string | null;
+  } | null;
 };
 
 export type QueueResponse = {

@@ -4,6 +4,7 @@ from pipeline import process_statement, review_queue
 from reference.loader import load_reference_data
 from models import TransactionResult
 from settings import settings
+from review_context import enrich_review_context
 
 _results: list[TransactionResult] = []
 _agent_reviews: dict[str, object] = {}
@@ -19,6 +20,7 @@ def process_all(
     if root.is_dir():
         for pdf in sorted(root.glob("*.pdf")):
             results.extend(process_statement(pdf, refs))
+    enrich_review_context(results)
     global _results, _agent_reviews
     _results = results
     _agent_reviews = {}

@@ -107,6 +107,38 @@ def create_agent_review(transaction_id: str) -> AgentReviewResult:
     if item is None:
         raise HTTPException(status_code=404, detail="Transaction not found")
     review = run_agent_review(transaction_id)
+    if review.fallback:
+        reason = review.fallback_reason
+        if reason == "AGENT_ENABLED is false":
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "code": "agent_disabled",
+                    "message": "Agent Review is disabled. Set AGENT_ENABLED=true and configure Gemini credentials.",
+                },
+            )
+        if reason == "GEMINI_API_KEY is not configured":
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "code": "missing_gemini_credentials",
+                    "message": "Agent Review requires GEMINI_API_KEY.",
+                },
+            )
+        if reason.startswith("Timed out after"):
+            raise HTTPException(
+                status_code=504,
+                detail={"code": "agent_timeout", "message": reason},
+            )
+        if reason.startswith("Gemini unavailable"):
+            raise HTTPException(
+                status_code=502,
+                detail={"code": "gemini_provider_error", "message": reason},
+            )
+        raise HTTPException(
+            status_code=409,
+            detail={"code": "agent_review_unavailable", "message": reason or review.summary},
+        )
     store_agent_review(review)
     return review
 

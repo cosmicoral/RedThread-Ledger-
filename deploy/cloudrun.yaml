@@ -1,5 +1,5 @@
-# Cloud Run service spec. Do not deploy from this chat.
-# Do not set OPENAI_API_KEY or ANTHROPIC_API_KEY.
+# Cloud Run service spec. Used as documentation; `gcloud run deploy --source .` is the path.
+# Do not set GEMINI_API_KEY, OPENAI_API_KEY, or ANTHROPIC_API_KEY.
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
@@ -33,6 +33,8 @@ spec:
               value: /data/hackathon/bank-statements
             - name: HACKATHON_REFERENCE_DIR
               value: /data/hackathon/reference-data
+            - name: AGENT_ENABLED
+              value: "false"
           resources:
             limits:
               cpu: "1"

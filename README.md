@@ -145,9 +145,11 @@ make lint
 
 One public service serves the UI and `/api`. Health: `GET /health`.
 
-Prepared, not deployed: root `Dockerfile`, `.dockerignore`, and [deploy/README.md](deploy/README.md). Do not pass an API key.
+One public Cloud Run service. Spec: root `Dockerfile`, `.dockerignore`, and [deploy/README.md](deploy/README.md). Do not pass an API key. Leave `AGENT_ENABLED=false`.
 
 ```bash
+gcloud auth login
+gcloud config set project YOUR_HACKATHON_PROJECT_ID
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
 
 gcloud run deploy redthread-ledger \
@@ -157,7 +159,7 @@ gcloud run deploy redthread-ledger \
   --port 8080 \
   --memory 1Gi \
   --timeout 300 \
-  --set-env-vars DEMO_MODE=true,CORS_ORIGINS=*
+  --set-env-vars DEMO_MODE=true,CORS_ORIGINS=*,AGENT_ENABLED=false
 ```
 
 ## Hackathon submission
@@ -166,7 +168,7 @@ gcloud run deploy redthread-ledger \
 - **Problem source:** Anonymised fund-manager NAV workflow interview
 - **Dataset:** Bank Statements to Journal Entries (runtime PDFs + allowlisted sheets only)
 - **Run locally:** `make demo`
-- **Demo video:** Add link before submission
+- **Demo video:** [https://www.youtube.com/watch?v=naY3fFEiUBM](https://www.youtube.com/watch?v=naY3fFEiUBM)
 - **Live application:** Add Cloud Run URL only after a separate deploy step
 
 ## Acknowledgements

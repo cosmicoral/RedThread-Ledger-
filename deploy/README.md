@@ -1,6 +1,6 @@
 # Cloud Run — one public service
 
-One container serves the review UI and `/api`. The matching and journal pipeline is unchanged. No Gemini key and no evaluation workbook are included.
+One container serves the review workspace (`/`) and `/api`. The matching and journal pipeline is unchanged. No Gemini key and no evaluation workbook are included.
 
 Probes: `GET /health` and `GET /api/health` return `{"status":"ok",...}`.
 
@@ -41,9 +41,9 @@ On the hackathon project, your user (or the Cloud Build service account used by 
 | `roles/cloudbuild.builds.editor` | Build the image from source |
 | `roles/artifactregistry.writer` | Push the image |
 
-The Cloud Run **runtime** service account does not need an API key. Leave `AGENT_ENABLED=false` unless you intentionally enable the optional Gemini review. Do not bake `GEMINI_API_KEY` into the image.
+The Cloud Run **runtime** service account does not need an API key. Leave `AGENT_ENABLED=false`. Do not bake `GEMINI_API_KEY` into the image or the deploy env.
 
-## 4. Deploy command (do not run until you are ready)
+## 4. Deploy
 
 From the repository root, after `make test` has passed:
 
@@ -61,7 +61,7 @@ gcloud run deploy redthread-ledger \
   --memory 1Gi \
   --cpu 1 \
   --timeout 300 \
-  --set-env-vars DEMO_MODE=true,CORS_ORIGINS=* \
+  --set-env-vars DEMO_MODE=true,CORS_ORIGINS=*,AGENT_ENABLED=false \
   --quiet
 ```
 
@@ -71,8 +71,8 @@ After deploy, open the printed URL. The UI is `/`; the API is `/api/queue`, `/ap
 
 ## What is in the image
 
-- Built frontend (calls `/api`, no localhost host)
-- FastAPI app
+- Built frontend (same-origin `/api`, no localhost host)
+- FastAPI app and the optional agent code, with the agent flag off
 - Seven statement PDFs and twelve allowlisted reference CSVs
 
 ## What is not in the image
@@ -80,3 +80,4 @@ After deploy, open the printed URL. The UI is `/`; the API is `/api/queue`, `/ap
 - `data/raw/` working workbook (`Staging Sheet`, `DIU`)
 - `.env` / API keys
 - Local venv and `node_modules`
+- `docs/screenshots`

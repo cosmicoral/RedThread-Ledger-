@@ -1,5 +1,9 @@
 # RedThread Ledger
 
+**Live app:** [https://redthread-ledger-119657658536.europe-west1.run.app/](https://redthread-ledger-119657658536.europe-west1.run.app/)
+
+**Demo video:** [https://www.youtube.com/watch?v=naY3fFEiUBM](https://www.youtube.com/watch?v=naY3fFEiUBM)
+
 **Evidence-linked bank statement processing for private-market fund operations.**
 
 RedThread Ledger turns bank statements and fund reference data into reviewable journal entries. Every proposed accounting decision links back to the source transaction and the reference data used to make it.
@@ -169,7 +173,7 @@ gcloud run deploy redthread-ledger \
 - **Dataset:** Bank Statements to Journal Entries (runtime PDFs + allowlisted sheets only)
 - **Run locally:** `make demo`
 - **Demo video:** [https://www.youtube.com/watch?v=naY3fFEiUBM](https://www.youtube.com/watch?v=naY3fFEiUBM)
-- **Live application:** Add Cloud Run URL only after a separate deploy step
+- **Live application:** [https://redthread-ledger-119657658536.europe-west1.run.app/](https://redthread-ledger-119657658536.europe-west1.run.app/)
 
 ## Acknowledgements
 
